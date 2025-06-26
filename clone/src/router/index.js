@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import SearchView from '../views/SearchView.vue'
 import BrowseView from '../views/BrowseView.vue'
 import AboutView from '../views/AboutView.vue'
+// import SearchView from '../views/SearchView.vue' // This import is now handled in the routes array
 
 const routes = [
   {
@@ -13,7 +13,7 @@ const routes = [
   {
     path: '/search',
     name: 'Search',
-    component: SearchView,
+    component: () => import('../views/SearchView.vue'),
     props: (route) => ({ geneA: route.query.geneA, geneB: route.query.geneB })
   },
   {

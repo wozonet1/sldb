@@ -126,11 +126,10 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, watch, defineProps } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref, reactive, onMounted, watch, defineProps  } from 'vue'
+import {  router} from 'vue-router'
 import axios from 'axios'
 
-const route = useRoute()
 
 const props = defineProps({
   geneA: { type: String, default: '' },
@@ -146,20 +145,14 @@ const searchResults = ref([])
 const loading = ref(false)
 const searchPerformed = ref(false)
 
-// Watch for changes in route queries and trigger search
-watch(
-  () => route.query,
-  (newQuery) => {
-    searchForm.gene1 = newQuery.geneA || ''
-    searchForm.gene2 = newQuery.geneB || ''
-    if (searchForm.gene1 || searchForm.gene2) {
-      searchGenes()
-    }
-  },
-  { immediate: true } // Run immediately on component mount
-)
+watch([() => props.geneA, () => props.geneB], ([geneA, geneB]) => {
+  searchForm.gene1 = geneA || ''
+  searchForm.gene2 = geneB || ''
+  if (searchForm.gene1 || searchForm.gene2) {
+    searchGenes()
+  }
+})
 
-// On component mount, if there are query parameters, perform search
 onMounted(() => {
   if (searchForm.gene1 || searchForm.gene2) {
     searchGenes()
