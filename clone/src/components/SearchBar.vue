@@ -34,6 +34,7 @@ const router = useRouter()
 const searchQuery = ref('')
 
 const handleSearch = () => {
+  try{
   if (searchQuery.value.trim()) {
     // 拆分基因（支持空格、逗号、分号分隔）
     const genes = searchQuery.value
@@ -48,6 +49,10 @@ const handleSearch = () => {
         geneB: genes[1] || ''  // 支持双基因搜索
       }
     })
+  }
+}catch (error) {
+    console.error('搜索时发生错误:', error)
+    // 可以在这里添加错误处理逻辑，比如显示提示信息
   }
 }
 </script>

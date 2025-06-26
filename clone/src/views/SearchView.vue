@@ -126,15 +126,16 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, watch, defineProps  } from 'vue'
-import {  router} from 'vue-router'
+import { ref, reactive, onMounted, watch, defineProps } from 'vue'
+import { useRouter } from 'vue-router' // 导入 useRouter 钩子
 import axios from 'axios'
-
 
 const props = defineProps({
   geneA: { type: String, default: '' },
   geneB: { type: String, default: '' }
 })
+
+const router = useRouter() // 使用 useRouter 钩子获取路由实例
 
 const searchForm = reactive({
   gene1: props.geneA || '',
