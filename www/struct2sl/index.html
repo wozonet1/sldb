@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Struct2SL - Synthetic Lethality Prediction</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div class="logo">
+        <h1>Struct2SL</h1>
+        <p class="subtitle">Synthetic Lethality Prediction</p>
+      </div>
+      <nav class="nav">
+        <ul class="nav-links">
+          <li><a href="#" onclick="showPage('home')">Home</a></li>
+          <li><a href="#" onclick="showPage('search')">Search</a></li>
+          <li><a href="#" onclick="showPage('about')">About us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div id="home" class="page">
+      <div class="hero">
+        <h2>Welcome to Struct2SL</h2>
+        <p>
+          Discover synthetic lethality pairs and gain deeper insights into
+          genetic interactions.
+        </p>
+        <div class="search-container">
+          <input type="text" id="search-box" placeholder="Search for gene pairs...(e.g., TSPAN1)" />
+          <button onclick="showPage('search')" class="cta-button">
+            Search
+          </button>
+        </div>
+      </div>
+      <div class="introduction">
+        <div class="introduction-text">
+          <h3>About Struct2SL</h3>
+          <p>
+            Struct2SL is a synthetic lethal gene pair prediction model, providing
+            valuable references for cancer research and drug development. Our system leverages advanced algorithms and
+            comprehensive data
+            sources to identify potential gene interactions that could lead to new therapeutic strategies.
+            For more detailed instructions, please refer to
+            <a href="https://github.com/hyr-hit/Struct2SL/blob/main/User%20Guide%20for%20webserver.md"
+              target="_blank">here.</a>
+          </p>
+        </div>
+        <div class="introduction-image">
+          <img src="img/frame.jpg" alt="Struct2SL Framework" />
+        </div>
+      </div>
+      <div class="data_introduction">
+        <div class="data_introduction-text">
+          <h3>Statistics of Struct2SL</h3>
+          <p>
+            Struct2SL uses the latest research data from SynLethDB (human synthetic lethal gene pairs and non-synthetic
+            lethal gene
+            pairs) to predict potential gene pairs. The current version covers 15794 human genes, and the results
+            presented are
+            computational prediction results.
+          </p>
+        </div>
+        <div class="data_introduction-image">
+          <img src="img/data.png" alt="gene photo" />
+        </div>
+      </div>
+    </div>
+
+    <div id="search" class="page" style="display: none">
+      <div class="search-container">
+        <div class="search-form">
+          <h2>Search Synthetic Lethality Pairs</h2>
+          <form id="search-form">
+            <div class="form-group">
+              <label for="geneA">Gene A:</label>
+              <input type="text" id="geneA" name="geneA" placeholder="Enter Gene A(e.g., TSPAN1)" required />
+            </div>
+            <div class="form-group">
+              <label for="geneB">Gene B (Optional):</label>
+              <input type="text" id="geneB" name="geneB" placeholder="Enter Gene B" />
+            </div>
+            <div class="filter-container">
+              <label><input type="radio" name="source-filter" value="ALL" checked> ALL</label>
+              <label><input type="radio" name="source-filter" value="SynlethDB"> SynlethDB</label>
+              <label><input type="radio" name="source-filter" value="Struct2SL"> Struct2SL</label>
+            </div>
+            <button type="submit" class="button">Submit</button>
+          </form>
+        </div>
+        <div class="search-results">
+          <h2>Results</h2>
+          <div id="result-table"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="about" class="page" style="display: none">
+      <div class="about-content">
+        <h1>About Us</h1>
+        <h2>Address</h2>
+        <p>
+          School of Computer Science and Technology,<br>
+          Harbin Institute of Technology(Shenzhen),<br>
+          Shenzhen, Guang Dong 518055, China.
+        </p>
+        <h2>Email</h2>
+        <p>lijunyi@hit.edu.cn</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Struct2SL. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    let searchData = null;
+    function showPage(pageId) {
+      const pages = document.querySelectorAll(".page");
+      pages.forEach((page) => {
+        page.style.display = "none"; // Hide all pages
+      });
+      if (pageId === "search") {
+        search();
+        document.getElementById(pageId).style.display = "block"; // Show the selected page
+        return;
+      }
+      document.getElementById(pageId).style.display = "block"; // Show the selected page
+    }
+
+    // 分页功能的辅助函数
+    function paginateResults(data, resultsContainer, itemsPerPage) {
+      let tableHTML = '<h2>Results</h2><div id="result-table">';
+      const totalPages = Math.ceil(data.length / itemsPerPage);
+
+      // 创建分页按钮
+      const paginationHTML = `
+      <div class="pagination">
+        <button id="prev-page" class="pagination-button" disabled>&lt; Previous</button>
+        <span id="current-page">1</span> of ${totalPages}
+        <button id="next-page" class="pagination-button">${totalPages > 1 ? "Next >" : "Next >"
+        }</button>
+      </div>
+      `;
+
+      // 显示第一页数据
+      let currentPage = 1;
+      let table = updateTable(currentPage);
+
+      // 更新表格内容
+      function updateTable(page) {
+        const start = (page - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        const pageData = data.slice(start, end);
+
+        tableHTML = '<h2>Results</h2><div id="result-table">';
+        if (pageData.length > 0) {
+          tableHTML += "<table>";
+          tableHTML += "<thead><tr>";
+          tableHTML += "<th>Gene A</th>";
+          tableHTML += "<th>Gene B</th>";
+          tableHTML += "<th>Prediction score</th>";
+          tableHTML += "<th>Predicting relation</th>";
+          tableHTML += "<th>Source</th>";
+          tableHTML += "</tr></thead>";
+          tableHTML += "<tbody>";
+          pageData.forEach((item) => {
+            const [l, r] = item["Predicting relation"].split("_");
+            tableHTML += "<tr>";
+            tableHTML += `<td>${item["Gene A"]}</td>`;
+            tableHTML += `<td>${item["Gene B"]}</td>`;
+            tableHTML += `<td>${parseFloat(item["Prediction score"]).toFixed(
+              4
+            )}</td>`;
+            tableHTML += `<td>${r}</td>`;
+            tableHTML += `<td>${l === "new" ? "Struct2SL" : "SynlethDB"
+              }</td>`;
+            tableHTML += "</tr>";
+          });
+          tableHTML += "</tbody></table>";
+        } else {
+          tableHTML += "<p>No results found</p>";
+        }
+        tableHTML += paginationHTML;
+        resultsContainer.innerHTML = tableHTML;
+
+        // 更新分页按钮状态
+        const prevButton = document.getElementById("prev-page");
+        const nextButton = document.getElementById("next-page");
+
+
+        prevButton.disabled = page === 1;
+        nextButton.disabled = page === totalPages;
+
+        document.getElementById("current-page").textContent = page;
+        // 添加分页按钮事件
+        document.getElementById("prev-page").addEventListener("click", () => {
+          if (currentPage > 1) {
+            currentPage--;
+            updateTable(currentPage);
+          }
+        });
+
+        document.getElementById("next-page").addEventListener("click", () => {
+          if (currentPage < totalPages) {
+            currentPage++;
+            updateTable(currentPage);
+          }
+        });
+      }
+    }
+
+    // 主搜索函数
+    function search() {
+      const geneA = document.getElementById("search-box").value.trim();
+      if (!geneA) {
+        alert("Gene A is required");
+        return;
+      }
+
+      // 显示加载中提示
+      const resultsSection = document.querySelector(".search-results");
+      resultsSection.innerHTML =
+        '<h2>Results</h2><div id="result-table"><p>Loading results...</p></div>';
+
+      // 构建API请求URL
+      let apiUrl = `http://120.76.218.216:5555/predict?geneA=${encodeURIComponent(
+        geneA
+      )}`;
+
+      // 发送API请求
+      fetch(apiUrl)
+        .then((response) => {
+          if (!response.ok) {
+            return response.json().then((err) => {
+              throw new Error(err.error || "Failed to fetch results");
+            });
+          }
+          return response.json();
+        })
+        .then((data) => {
+          searchData = data;
+          if (Array.isArray(searchData) && searchData.length > 0) {
+            // 如果返回的是数组，则分页显示
+            paginateResults(searchData, resultsSection, 10);
+          } else {
+            // 如果返回的是单一结果，直接显示
+            displayResults(searchData, resultsSection);
+          }
+        })
+        .catch((error) => {
+          resultsSection.innerHTML = `<h2>Results</h2><div id="result-table"><p class="error">${error.message}</p></div>`;
+        });
+    }
+
+    // 表单提交事件
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.querySelector("form");
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const geneA = document
+          .querySelector('input[name="geneA"]')
+          .value.trim();
+        const geneB = document
+          .querySelector('input[name="geneB"]')
+          .value.trim();
+
+        if (!geneA) {
+          alert("Gene A is required");
+          return;
+        }
+
+        // 显示加载中提示
+        const resultsSection = document.querySelector(".search-results");
+        resultsSection.innerHTML =
+          '<h2>Results</h2><div id="result-table"><p>Loading results...</p></div>';
+
+        // 构建API请求URL
+        let apiUrl = `http://120.76.218.216:5555/predict?geneA=${encodeURIComponent(
+          geneA
+        )}`;
+        if (geneB) {
+          apiUrl += `&geneB=${encodeURIComponent(geneB)}`;
+        }
+
+        // 发送API请求
+        fetch(apiUrl)
+          .then((response) => {
+            if (!response.ok) {
+              return response.json().then((err) => {
+                throw new Error(err.error || "Failed to fetch results");
+              });
+            }
+            return response.json();
+          })
+          .then((data) => {
+            searchData = data
+            if (Array.isArray(searchData) && searchData.length > 0) {
+              // 如果返回的是数组，则分页显示
+              paginateResults(searchData, resultsSection, 10);
+            } else {
+              // 如果返回的是单一结果，直接显示
+              displayResults(searchData, resultsSection);
+            }
+          })
+          .catch((error) => {
+            resultsSection.innerHTML = `<h2>Results</h2><div id="result-table"><p class="error">${error.message}</p></div>`;
+          });
+      });
+
+      // 添加筛选功能
+      document.querySelectorAll('input[name="source-filter"]').forEach((radio) => {
+        radio.addEventListener("change", () => {
+          const selectedSource = document.querySelector('input[name="source-filter"]:checked').value;
+          const resultsSection = document.querySelector(".search-results");
+          const data = searchData.filter(i => {
+            if (selectedSource === 'SynlethDB') {
+              return i['Predicting relation'].split('_')[0] === 'old';
+            } else if (selectedSource === 'Struct2SL') {
+              return i['Predicting relation'].split('_')[0] === 'new';
+            }
+            return true;
+          })
+          paginateResults(data, resultsSection, 10);
+        });
+      });
+    });
+
+    // 显示结果的辅助函数
+    function displayResults(data, resultsContainer) {
+      let resultHTML = '<div class="result-box">'; // 添加一个容器类用于样式控制
+      resultHTML += "<h2>Result</h2>"; // 添加标题
+
+      if (typeof data === "object" && data !== null) {
+        // 单一结果的展示
+        const [l, r] = data["label"].split("_");
+        resultHTML += `<p>Gene A: ${data["GeneA"]}</p>`;
+        resultHTML += `<p>Gene B: ${data["GeneB"]}</p>`;
+        resultHTML += `<p>Prediction score: ${parseFloat(
+          data["Prediction"]
+        ).toFixed(4)}</p>`;
+        resultHTML += `<p>Predicting relation: ${r}</p>`;
+        resultHTML += `<p>source: ${l === "new" ? "Struct2SL" : "SynlethDB"
+          }</p>`;
+      } else {
+        resultHTML += "<p>No results found</p>";
+      }
+
+      resultHTML += "</div>";
+      resultsContainer.innerHTML = resultHTML;
+    }
+  </script>
+</body>
+
+</html>

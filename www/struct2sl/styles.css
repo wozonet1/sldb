@@ -1,0 +1,452 @@
+/* styles.css */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: #1F4690;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+header .container {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+}
+
+header .logo {
+    display: flex;
+    flex-direction: column;
+    margin-right: auto;
+}
+
+header h1 {
+    font-size: 2em;
+    margin: 0;
+}
+
+header .subtitle {
+    font-size: 1em;
+    opacity: 0.8;
+    margin: 5px 0 0 0;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.nav-links li {
+    margin: 0 10px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1em;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.nav-links a:hover {
+    background-color: #FF8000;
+}
+
+main {
+    flex: 1;
+    padding: 40px 0;
+    width: 100%;
+}
+
+.hero {
+    background: url('img/home_background.png') no-repeat center center/cover;
+    color: white;
+    padding: 100px 20px;
+    text-align: center;
+    background-color: #007BFF;
+    position: relative;
+    margin-top: -50px;
+}
+
+.hero h2 {
+    font-size: 3em;
+}
+
+.hero p {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#search-box {
+    width: 1100px;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: #FFA07A;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #FF8000;
+}
+
+.introduction {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.introduction-text {
+    width: 45%;
+}
+
+.introduction-text h3 {
+    font-size: 2em;
+}
+
+.introduction-text p {
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+.introduction-image {
+    width: 45%;
+    text-align: center;
+}
+
+.introduction-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.data_introduction {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.data_introduction-text {
+    width: 45%;
+}
+
+.data_introduction-text h3 {
+    font-size: 2em;
+}
+
+.data_introduction-text p {
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+.data_introduction-image {
+    width: 45%;
+    text-align: center;
+}
+
+.data_introduction-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.search-form {
+    width: 45%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-form h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.search-results {
+    width: 45%;
+    text-align: center;
+}
+
+/* 增加样式以使按钮更大且更美观 */
+.button {
+    display: block;
+    background-color: #FFA07A;
+    /* 按钮背景颜色 */
+    color: white;
+    /* 文字颜色 */
+    padding: 15px 30px;
+    /* 增加内边距以使按钮更大 */
+    font-size: 1.2em;
+    /* 增大字体大小 */
+    text-decoration: none;
+    border: none;
+    /* 去掉边框 */
+    border-radius: 10px;
+    /* 圆角边框 */
+    cursor: pointer;
+    /* 鼠标悬停时显示手型 */
+    transition: background-color 0.3s ease;
+    /* 平滑过渡效果 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* 添加阴影效果 */
+    margin: 20px auto 0;
+    /* 增大间距并居中显示 */
+    width: fit-content;
+    width: 50%;
+}
+
+.button:hover {
+    background-color: #FF8000;
+    /* 鼠标悬停时的背景颜色 */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    /* 鼠标悬停时的阴影效果 */
+}
+
+#result-table {
+    width: 100%;
+    margin-top: 20px;
+}
+
+#result-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#result-table th,
+#result-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#result-table th {
+    background-color: #f2f2f2;
+}
+
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pagination-button {
+    display: inline-block;
+    margin: 0 10px;
+    padding: 5px 10px;
+    background-color: #1F4690;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.pagination-button:hover {
+    background-color: #FF8000;
+}
+
+.pagination-button:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1.1em;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-info {
+    width: 45%;
+    text-align: center;
+}
+
+.search-info img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-info p {
+    font-size: 1.1em;
+    color: #666;
+}
+
+footer {
+    background-color: #343a40;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    width: 100%;
+}
+
+footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+    padding: 10px;
+    background-color: #f8d7da;
+    border-radius: 5px;
+}
+
+#result-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border: 1px solid #ddd;
+}
+
+#result-table th,
+#result-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+#result-table th {
+    background-color: #f2f2f2;
+}
+
+#result-table tr:hover {
+    background-color: #f5f5f5;
+}
+
+.result-box {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px 20px 20px 40px;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 70%;
+}
+
+.result-box p {
+    margin: 5px 0;
+    font-size: 1.2em;
+    text-align: left;
+    line-height: 1.5;
+}
+
+.result-box p:first-child {
+    margin-top: 0;
+}
+
+.about-content {
+    max-width: 1200px;
+    margin: 0;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.about-content h3 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.about-content p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    color: #666;
+}
+
+.filter-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    font-size: 1em;
+}
+
+.filter-container label {
+    margin-right: 25px;
+    font-size: 1.1em;
+}
+
+.filter-container input[type="radio"] {
+    margin-right: 5px;
+    width: 15px;
+    height: 15px;
+}

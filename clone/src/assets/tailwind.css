@@ -1,0 +1,62 @@
+@import "tailwindcss";
+@import "tailwindcss/utilities";
+
+@layer utilities {
+  .content-auto {
+    content-visibility: auto;
+  }
+  
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .transition-transform {
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+}
+
+@theme {
+  /* 主色调 - 深蓝色 */
+  --color-primary: #02346B;  
+
+  /* 主色的 hover 状态（用于按钮、链接等交互元素） */
+  --color-primary-hover: #012750;  
+
+  /* 比主色更浅，用于次级强调（比如按钮默认、轻提示背景等） */
+  --color-primary-light: #6699CC;  
+
+  /* 对比色 - 暖橙色（突出关键操作，比如按钮点击、错误提示） */
+  --color-accent: #FF8C00;  
+  --color-accent-hover: #E67B00; /* accent 的 hover 加深 */
+
+  /* 邻近色 - 青蓝色（辅助装饰、渐变搭配 ，让页面更灵动） */
+  --color-adjacent: #00B3D4;  
+
+  /* 中性色（适配不同场景文字、背景） */
+  --color-neutral-white: #FFFFFF;
+  --color-neutral-gray-light: #F0F0F0;
+  --color-neutral-gray-dark: #505050;
+
+  --hover-outline-color: rgba(255, 140, 0, 0.3); /* 悬停时“框”的颜色，用 accent 透明版 */
+
+  --color-for-gradient:#2f8f8a
+ 
+}
+
+
+/* 基础样式 */
+body {
+  font-family: 'Inter', sans-serif;
+}  
+
+@layer components {
+  .search-btn {
+    @apply bg-[color:var(--color-accent)] text-white py-2 px-4 rounded-lg transition-colors;
+  }
+  .search-btn:hover {
+    @apply bg-[color:var(--color-accent-hover)] shadow-[0_0_0_3px_rgba(255,140,0,0.3)];
+    /* 用 Tailwind 的 shadow 语法模拟外框，或者自定义 outline */
+  }
+}
