@@ -114,6 +114,7 @@
         type="number" 
         min="1" 
         :max="totalPages" 
+        @keydown="handleKeyDown"
         class="w-16 px-2 py-1 border border-gray-300 dark:border-gray-600 rounded-md text-sm bg-white dark:bg-neutral-700 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-primary dark:focus:ring-primary-dark focus:border-primary dark:focus:border-primary-dark transition-colors duration-300"
       >
       <label for="pageJump" class="mr-2 text-sm text-gray-700 dark:text-gray-300 transition-colors duration-300">{{ $t('search.pagination.Page') }}</label>
@@ -175,4 +176,28 @@ const goToNextPage = () => {
     emit('goToNext', props.currentPage + 1)
   }
 }
+
+const handleKeyDown = (e) => {
+  // 向上箭头键（KeyUp）
+  if (e.key === 'ArrowUp') {
+    e.preventDefault() // 阻止默认向上计数行为
+    if (pageJump.value > 1) {
+      pageJump.value--
+    }
+  }
+  // 向下箭头键（KeyDown）
+  else if (e.key === 'ArrowDown') {
+    e.preventDefault() // 阻止默认向下计数行为
+    if (pageJump.value < totalPages.value) {
+      pageJump.value++
+    }
+  }
+  // 回车键（Enter）
+  else if (e.key === 'Enter') {
+    e.preventDefault() // 阻止默认提交行为
+    goToPage(parseInt(pageJump.value))
+  }
+}
+
+
 </script>

@@ -13,7 +13,7 @@
         type="submit" 
         class="px-8 py-3 bg-accent dark:bg-accent-dark text-white rounded-r-lg hover:bg-accent-hover dark:hover:bg-accent transition-colors"
       >
-        Search
+        {{ $t('search.searchButton') }}
       </button>
     </form>
   </div>
