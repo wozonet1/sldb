@@ -27,6 +27,24 @@ export default {
         content: 'We have optimized the website interface, improving user experience and search functionality for more convenient data retrieval.',
         date: 'Updated on 2025-06-01'
       }
+    },
+    statistics: {
+      title: 'Statistics of Struct2SL',
+      description: 'Struct2SL uses the latest research data from SynLethDB (human synthetic lethal gene pairs and non-synthetic lethal gene pairs) to predict potential gene pairs. The current version covers 15794 human genes, and the results presented are computational prediction results.',
+      table: {
+        header: {
+          dataType: 'Types of data',
+          entityCount: 'Number of entities'
+        },
+        rows: {
+          syntheticLethalPairs: 'Synthetic lethal gene pairs',
+          nonsyntheticLethalPairs: 'Nonsynthetic lethal gene pairs',
+          proteinSequence: 'Protein sequence',
+          ppiNodesCount: 'Protein-Protein Interaction Networks (nodes)',
+          ppiEdgesCount: 'Protein-Protein Interaction Networks (edges)',
+          proteinStructure: 'Protein spatial structure'
+        }
+      }
     }
   },
   search: {
@@ -78,11 +96,26 @@ export default {
     }
   },
   footer: {
-    about: 'About Struct2SL',
-    aboutContent: 'Struct2SL is a database focused on synthetic lethality gene pairs, providing potential targets for cancer treatment.',
-    quickLinks: 'Quick Links',
-    resources: 'Resources',
-    contact: 'Contact Us',
-    copyright: 'Copyright © 2025 Struct2SL. All rights reserved.'
+    about: {
+      title: 'About Struct2SL',
+      description: 'Struct2SL is a database focused on synthetic lethality gene pairs, providing potential targets for cancer treatment.'
+    },
+    quickLinks: {
+      title: 'Quick Links',
+      home: 'Home',
+      search: 'Search',
+      about: 'About'
+    },
+    resources: {
+      title: 'Resources',
+      apiDocs: 'API Documentation',
+      tutorials: 'Tutorials',
+      download: 'Download Data',
+      faq: 'FAQ'
+    },
+    contact: {
+      title: 'Contact Us'
+    },
+    copyright: 'All rights reserved.'
   }
 }

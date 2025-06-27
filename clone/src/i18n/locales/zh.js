@@ -27,6 +27,24 @@ export default {
         content: '我们对网站进行了界面优化，提升了用户体验和搜索功能，使数据检索更加便捷。',
         date: '更新于 2025-06-01'
       }
+    },
+    statistics: {
+      title: 'Struct2SL 统计数据',
+      description: 'Struct2SL使用来自SynLethDB的最新研究数据（人类合成致死基因对和非合成致死基因对）来预测潜在的基因对。当前版本覆盖了15794个人类基因，所呈现的结果是计算预测结果。',
+      table: {
+        header: {
+          dataType: '数据类型',
+          entityCount: '实体数量'
+        },
+        rows: {
+          syntheticLethalPairs: '合成致死基因对',
+          nonsyntheticLethalPairs: '非合成致死基因对',
+          proteinSequence: '蛋白质序列',
+          ppiNodesCount: '蛋白质-蛋白质相互作用网络（节点）',
+          ppiEdgesCount: '蛋白质-蛋白质相互作用网络（边）',
+          proteinStructure: '蛋白质空间结构'
+        }
+      }
     }
   },
   search: {
@@ -78,11 +96,26 @@ export default {
     }
   },
   footer: {
-    about: '关于 Struct2SL',
-    aboutContent: 'Struct2SL是一个专注于合成致死基因对的数据库，为癌症治疗提供潜在靶点。',
-    quickLinks: '快速链接',
-    resources: '资源',
-    contact: '联系我们',
-    copyright: '版权所有 © 2025 Struct2SL. 保留所有权利。'
+    about: {
+      title: '关于 Struct2SL',
+      description: 'Struct2SL是一个专注于合成致死基因对的数据库，为癌症治疗提供潜在靶点。'
+    },
+    quickLinks: {
+      title: '快速链接',
+      home: '首页',
+      search: '搜索',
+      about: '关于'
+    },
+    resources: {
+      title: '资源',
+      apiDocs: 'API文档',
+      tutorials: '使用教程',
+      download: '下载数据',
+      faq: '常见问题'
+    },
+    contact: {
+      title: '联系我们'
+    },
+    copyright: '保留所有权利。'
   }
 }

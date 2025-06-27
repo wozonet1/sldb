@@ -11,7 +11,7 @@
       >
       <button 
         type="submit" 
-        class="px-8 py-3 bg-[#ff9f7f] text-white rounded-r-lg hover:bg-[#ff8c66] transition-colors"
+        class="px-8 py-3 bg-accent text-white rounded-r-lg hover:bg-accent-hover transition-colors"
       >
         Search
       </button>

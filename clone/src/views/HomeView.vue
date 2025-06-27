@@ -73,15 +73,11 @@
     <!-- Statistics of Struct2SL 部分 -->
     <section class="px-4 py-12 bg-gray-50">
       <div class="max-w-7xl mx-auto">
-        <h2 class="text-3xl font-bold mb-6">Statistics of Struct2SL</h2>
+        <h2 class="text-3xl font-bold mb-6">{{ $t('home.statistics.title') }}</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:items-start">
           <div>
             <p class="text-gray-700 mb-4 text-xl leading-relaxed" style="max-width: 500px;">
-              Struct2SL uses the latest research data from SynLethDB
-              (human synthetic lethal gene pairs and non-synthetic lethal
-              gene pairs) to predict potential gene pairs. The current version
-              covers 15794 human genes, and the results presented are
-              computational prediction results.
+              {{ $t('home.statistics.description') }}
             </p>
           </div>
           <div class="rounded-lg overflow-hidden shadow-lg">
@@ -90,33 +86,33 @@
               <table class="w-full border-collapse">
                 <thead>
                   <tr class="bg-gray-100">
-                    <th class="border p-2 text-left">Types of data</th>
-                    <th class="border p-2 text-left">Number of entities</th>
+                    <th class="border p-2 text-left">{{ $t('home.statistics.table.header.dataType') }}</th>
+                    <th class="border p-2 text-left">{{ $t('home.statistics.table.header.entityCount') }}</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td class="border p-2">Synthetic lethal gene pairs</td>
+                    <td class="border p-2">{{ $t('home.statistics.table.rows.syntheticLethalPairs') }}</td>
                     <td class="border p-2">23749</td>
                   </tr>
                   <tr>
-                    <td class="border p-2">Nonsynthetic lethal gene pairs</td>
+                    <td class="border p-2">{{ $t('home.statistics.table.rows.nonsyntheticLethalPairs') }}</td>
                     <td class="border p-2">103613</td>
                   </tr>
                   <tr>
-                    <td class="border p-2">Protein sequence</td>
+                    <td class="border p-2">{{ $t('home.statistics.table.rows.proteinSequence') }}</td>
                     <td class="border p-2">20504</td>
                   </tr>
                   <tr>
-                    <td class="border p-2">Protein-Protein Interaction Networks (nodes)</td>
+                    <td class="border p-2">{{ $t('home.statistics.table.rows.ppiNodesCount') }}</td>
                     <td class="border p-2">17740</td>
                   </tr>
                   <tr>
-                    <td class="border p-2">Protein-Protein Interaction Networks (edges)</td>
+                    <td class="border p-2">{{ $t('home.statistics.table.rows.ppiEdgesCount') }}</td>
                     <td class="border p-2">1477610</td>
                   </tr>
                   <tr>
-                    <td class="border p-2">Protein spatial structure</td>
+                    <td class="border p-2">{{ $t('home.statistics.table.rows.proteinStructure') }}</td>
                     <td class="border p-2">23391</td>
                   </tr>
                 </tbody>

@@ -34,7 +34,7 @@
         <div class="mt-6 flex justify-end">
           <button 
             type="submit" 
-            class="px-6 py-2 bg-[#ff9f7f] text-white rounded-lg hover:bg-[#ff8c66] transition-colors"
+            class="px-6 py-2 bg-accent text-white rounded-lg hover:bg-accent-hover transition-colors"
           >
             <i class="fa fa-search mr-2"></i>{{ $t('search.searchButton') }}
           </button>
@@ -110,7 +110,7 @@
       <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ $t('search.noResults.title') }}</h3>
       <p class="text-gray-500 mb-6">{{ $t('search.noResults.suggestion') }}</p>
       <button 
-        class="px-6 py-2 bg-[#ff9f7f] text-white rounded-lg hover:bg-[#ff8c66] transition-colors shadow-md"
+        class="px-6 py-2 bg-accent text-white rounded-lg hover:bg-accent-hover transition-colors shadow-md"
         @click="resetSearch"
       >
         {{ $t('search.noResults.reset') }}

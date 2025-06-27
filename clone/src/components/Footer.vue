@@ -55,7 +55,9 @@
 </template>
 
 <script setup>
-// 页脚组件逻辑
+import { useI18n } from 'vue-i18n'
 
-</script>  
+// 获取i18n实例
+const { t } = useI18n()
+</script>
 
