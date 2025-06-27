@@ -63,7 +63,7 @@
               <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ result['Gene A'] }}</td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ result['Gene B'] }}</td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ result['Prediction score'] }}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ result['Predicting relation'] }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ result['Predicting relation']?.slice(-3)=== '_SL'?'SL':'nonSL' }}</td>
             </tr>
           </tbody>
         </table>
