@@ -1,15 +1,15 @@
 <template>
   <div class="space-y-8">
-    <h1 class="text-3xl font-bold">关于 Struct2SL</h1>
+    <h1 class="text-3xl font-bold">{{ $t('about.title') }}</h1>
     
     <!-- 简介 -->
     <div class="bg-white rounded-xl shadow-md p-6">
-      <h2 class="text-2xl font-semibold mb-4">项目简介</h2>
+      <h2 class="text-2xl font-semibold mb-4">{{ $t('about.sections.whatIs.title') }}</h2>
       <p class="text-gray-700 mb-4">
-        Struct2SL 是一种合成致死基因对预测模型，为癌症研究和药物开发提供了宝贵的参考。我们的系统利用先进的算法和全面的数据源来识别潜在的基因相互作用，可能导致新的治疗策略。
+        {{ $t('about.description') }}
       </p>
       <p class="text-gray-700">
-        合成致死是指两个非必需基因同时失活时导致细胞死亡，而单个基因失活不会产生这种效应的现象。这一概念为癌症治疗提供了潜在的选择性靶点，因为癌细胞通常携带特定基因突变，使其依赖于补偿性通路存活。
+        {{ $t('about.sections.whatIs.content') }}
       </p>
     </div>
     
@@ -17,7 +17,10 @@
     
     <!-- 团队 -->
     <div class="bg-white rounded-xl shadow-md p-6">
-      <h2 class="text-2xl font-semibold mb-4">研究团队</h2>
+      <h2 class="text-2xl font-semibold mb-4">{{ $t('about.sections.ourMission.title') }}</h2>
+      <p class="text-gray-700 mb-4">
+        {{ $t('about.sections.ourMission.content') }}
+      </p>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <div class="flex flex-col items-center">
           <div class="w-24 h-24 rounded-full bg-gray-200 mb-4 overflow-hidden">
@@ -51,16 +54,16 @@
 
     <!-- 联系我们 -->
     <div class="bg-white rounded-xl shadow-md p-6">
-      <h2 class="text-2xl font-semibold mb-4">联系我们</h2>
+      <h2 class="text-2xl font-semibold mb-4">{{ $t('about.sections.contact.title') }}</h2>
       <p class="text-gray-700 mb-4">
         如有任何问题、建议或合作意向，请通过以下方式联系我们：
       </p>
       <div class="flex flex-col md:flex-row gap-6">
         <div>
-          <h3 class="font-semibold mb-2">电子邮件</h3>
+          <h3 class="font-semibold mb-2">{{ $t('about.sections.contact.email') }}</h3>
           <p class="text-gray-600 mb-4">lijunyi@hit.edu.cn</p>
           
-          <h3 class="font-semibold mb-2">地址</h3>
+          <h3 class="font-semibold mb-2">{{ $t('about.sections.contact.phone') }}</h3>
           <p class="text-gray-600">
             计算机科学技术学院<br>
             哈尔滨工业大学 (深圳)<br>
@@ -75,5 +78,8 @@
 </template>
 
 <script setup>
-// 关于页面逻辑
-</script>  
+import { useI18n } from 'vue-i18n'
+
+// 获取i18n实例
+const { t } = useI18n()
+</script>

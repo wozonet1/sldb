@@ -5,10 +5,10 @@
     <div class="max-w-7xl mx-auto px-4">
       <div class="text-center mb-8">
         <h1 class="text-5xl md:text-6xl font-bold mb-6">
-          Welcome to Struct2SL
+          {{ $t('home.welcome') }}
         </h1>
         <p class="text-xl md:text-2xl mb-10">
-          Discover synthetic lethality pairs and gain deeper insights into genetic interactions.
+          {{ $t('home.subtitle') }}
         </p>
         
         <!-- 搜索栏 -->
@@ -22,23 +22,23 @@
     
     <!-- 统计数据 -->
     <section class="grid grid-cols-2 md:grid-cols-4 gap-6 px-4">
-      <StatCard value="12,543" label="基因对" />
-      <StatCard value="5,678" label="实验" />
-      <StatCard value="3,210" label="癌症类型" />
-      <StatCard value="890" label="出版物" />
+      <StatCard value="12,543" :label="$t('home.stats.genePairs')" />
+      <StatCard value="5,678" :label="$t('home.stats.experiments')" />
+      <StatCard value="3,210" :label="$t('home.stats.cancerTypes')" />
+      <StatCard value="890" :label="$t('home.stats.publications')" />
     </section>
     
     <!-- 最近更新 -->
     <section class="px-4">
-      <h2 class="text-2xl font-bold mb-6">最近更新</h2>
+      <h2 class="text-2xl font-bold mb-6">{{ $t('home.updates.title') }}</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <UpdateCard>
           <template #icon>
             <i class="fa fa-flask"></i>
           </template>
-          <template #title>新增乳腺癌相关基因对</template>
-          <template #content>我们新增了342个与乳腺癌相关的合成致死基因对，为乳腺癌治疗提供了新的潜在靶点。</template>
-          <template #date>更新于 2025-06-15</template>
+          <template #title>{{ $t('home.updates.newBreastCancer.title') }}</template>
+          <template #content>{{ $t('home.updates.newBreastCancer.content') }}</template>
+          <template #date>{{ $t('home.updates.newBreastCancer.date') }}</template>
         </UpdateCard>
         
         <!-- 可以轻松添加更多更新卡片 -->
@@ -46,9 +46,9 @@
           <template #icon>
             <i class="fa fa-code"></i>
           </template>
-          <template #title>网站界面优化</template>
-          <template #content>我们对网站进行了界面优化，提升了用户体验和搜索功能，使数据检索更加便捷。</template>
-          <template #date>更新于 2025-06-01</template>
+          <template #title>{{ $t('home.updates.websiteOptimization.title') }}</template>
+          <template #content>{{ $t('home.updates.websiteOptimization.content') }}</template>
+          <template #date>{{ $t('home.updates.websiteOptimization.date') }}</template>
         </UpdateCard>
       </div>
     </section>
@@ -57,13 +57,9 @@
     <section class="px-4 py-12 bg-gray-50">
       <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:items-start">
         <div>
-          <h2 class="text-3xl font-bold mb-6">About Struct2SL</h2>
+          <h2 class="text-3xl font-bold mb-6">{{ $t('about.title') }}</h2>
           <p class="text-gray-700 mb-5 text-xl leading-relaxed" style="max-width: 500px;">
-            Struct2SL is a synthetic lethal gene pair prediction model,
-            providing valuable references for cancer research and drug
-            development. Our system leverages advanced algorithms and
-            comprehensive data sources to identify potential gene
-            interactions that could lead to new therapeutic strategies. For
+            {{ $t('about.description') }} For
             more detailed instructions, please refer to <a href="https://github.com/hyr-hit/Struct2SL/blob/main/User%20Guide%20for%20webserver.md" class="text-primary hover:underline">here</a>.
           </p>
         </div>
@@ -137,9 +133,13 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import SearchBar from '../components/SearchBar.vue'
 import UpdateCard from '../components/UpdateCard.vue'
 import StatCard from '../components/StatCard.vue'
+
+// 获取i18n实例
+const { t } = useI18n()
 
 // 页面加载状态
 const loading = ref(true)

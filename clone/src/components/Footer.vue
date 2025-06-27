@@ -46,7 +46,7 @@
           
         </div>
       </div>
-      
+
       <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-500">
         <p>&copy; 2025 Struct2SL. 保留所有权利。</p>
       </div>
@@ -56,4 +56,6 @@
 
 <script setup>
 // 页脚组件逻辑
+
 </script>  
+
