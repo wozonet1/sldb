@@ -41,69 +41,79 @@
         </div>
       </form>
     </div>
-    
-    <!-- 搜索结果 -->
-    <div v-if="searchResults.length > 0" class="bg-white rounded-xl shadow-md overflow-hidden">
-      <div class="p-6 border-b border-gray-200">
-        <h2 class="text-xl font-semibold">{{ $t('search.results') }} ({{ searchResults.length }})</h2>
+    <!-- 搜索结果：单个对象的特殊展示 -->
+    <div 
+      v-if="
+        !Array.isArray(searchResults) && 
+        Object.keys(searchResults).length > 0 && 
+        !loading && 
+        searchPerformed
+      " 
+      class="bg-white rounded-xl shadow-md p-6 space-y-4"
+    >
+      <h2 class="text-xl font-semibold">{{ $t('search.results') }} </h2>
+      <div class="space-y-2">
+        <p><strong>{{ $t('search.table.gene1') }}:</strong> {{ searchResults.GeneA }}</p>
+        <p><strong>{{ $t('search.table.gene2') }}:</strong> {{ searchResults.GeneB }}</p>
+        <p><strong>{{ $t('search.table.predictionScore') }}:</strong> {{ searchResults.Prediction }}</p>
+        <p><strong>{{ $t('search.table.predictingRelation') }}:</strong> {{ searchResults['Predicting relation']?.slice(-3) === '_SL' ? 'SL' : 'nonSL' }}</p>
+        <p><strong>{{ $t('search.table.source') }}:</strong> {{ searchResults['Predicting relation']?.slice(3) === 'new' ? 'Struct2SL' : 'SynlethDB' }}</p>
       </div>
-      
+    </div>
+
+   <!-- 多结果表格 + 分页 -->
+    <div v-else-if="Array.isArray(searchResults)" class="bg-white rounded-xl shadow-md overflow-hidden">
+      <div class="p-6 border-b border-gray-200">
+        <h2 class="text-xl font-semibold">
+          {{ $t('search.results') }} ({{ searchResults.length }})
+        </h2>
+      </div>
+
+      <!-- 表格：只渲染当前页数据 -->
       <div class="overflow-x-auto">
         <table class="min-w-full divide-y divide-gray-200">
-          <thead class="bg-gray-50">
-            <tr>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('search.table.gene1') }}</th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('search.table.gene2') }}</th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('search.table.predictionScore') }}</th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('search.table.predictingRelation') }}</th>
-            </tr>
-          </thead>
+          <!-- 原有表头代码... -->
           <tbody class="bg-white divide-y divide-gray-200">
-            <tr v-for="(result, index) in searchResults" :key="index" class="hover:bg-gray-50 transition-colors">
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ result['Gene A'] }}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ result['Gene B'] }}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ result['Prediction score'] }}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ result['Predicting relation']?.slice(-3)=== '_SL'?'SL':'nonSL' }}</td>
+            <tr 
+              v-for="(result, index) in paginatedResults" 
+              :key="index" 
+              class="hover:bg-gray-50 transition-colors"
+            >
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                {{ result['Gene A'] }}
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                {{ result['Gene B'] }}
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                {{ result['Prediction score'] }}
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                {{ result['Predicting relation']?.slice(-3) === '_SL' ? 'SL' : 'nonSL' }}
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
-      
-      <!-- 分页 -->
-      <div class="p-6 border-t border-gray-200 flex items-center justify-between">
-        <div class="flex-1 flex justify-between sm:hidden">
-          <button class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">{{ $t('search.pagination.previous') }}</button>
-          <button class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">{{ $t('search.pagination.next') }}</button>
-        </div>
-        <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-          <div>
-            <p class="text-sm text-gray-700">
-              {{ $t('search.pagination.showing') }} <span class="font-medium">1</span> {{ $t('search.pagination.to') }} <span class="font-medium">10</span> {{ $t('search.pagination.of') }} <span class="font-medium">{{ searchResults.length }}</span> {{ $t('search.pagination.results') }}
-            </p>
-          </div>
-          <div>
-            <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-              <button class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                <span class="sr-only">{{ $t('search.pagination.previous') }}</span>
-                <i class="fa fa-chevron-left"></i>
-              </button>
-              <button class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-primary text-sm font-medium text-white">1</button>
-              <button class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">2</button>
-              <button class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">3</button>
-              <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">...</span>
-              <button class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">10</button>
-              <button class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                <span class="sr-only">{{ $t('search.pagination.next') }}</span>
-                <i class="fa fa-chevron-right"></i>
-              </button>
-            </nav>
-          </div>
-        </div>
-      </div>
+
+      <!-- 分页组件 -->
+      <Pagination 
+        :total-items="searchResults.length" 
+        :page-size="10" 
+        :current-page="currentPage" 
+        @goToPage="goToPage" 
+        @goToPrevious="goToPreviousPage" 
+        @goToNext="goToNextPage" 
+      />
+    </div>
+    <!-- 加载中状态 -->
+    <div v-else-if="loading" class="bg-white rounded-xl shadow-md p-8 text-center">
+      <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary mx-auto mb-4"></div>
+      <p class="text-gray-500">{{ $t('search.loading') }}</p>
     </div>
     
     <!-- 无结果提示 -->
-    <div v-else-if="!loading && searchPerformed" class="bg-white rounded-xl shadow-md p-8 text-center">
+    <div v-else-if="!loading && searchPerformed && (!searchResults || searchResults.length === 0)" class="bg-white rounded-xl shadow-md p-8 text-center">
       <div class="text-5xl text-gray-300 mb-4">
         <i class="fa fa-search"></i>
       </div>
@@ -116,20 +126,15 @@
         {{ $t('search.noResults.reset') }}
       </button>
     </div>
-    
-    <!-- 加载中状态 -->
-    <div v-else-if="loading" class="bg-white rounded-xl shadow-md p-8 text-center">
-      <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary mx-auto mb-4"></div>
-      <p class="text-gray-500">{{ $t('search.loading') }}</p>
-    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, watch, defineProps } from 'vue'
+import { ref, reactive, onMounted, watch, defineProps, computed } from 'vue'
 import { useRouter } from 'vue-router' // 导入 useRouter 钩子
 import { useI18n } from 'vue-i18n' // 导入 useI18n 钩子
 import axios from 'axios'
+import Pagination from '@/components/Pagination.vue' // 导入分页组件
 
 // 获取i18n实例
 const { t } = useI18n()
@@ -150,6 +155,41 @@ const searchResults = ref([])
 const loading = ref(false)
 const searchPerformed = ref(false)
 
+// 分页相关变量
+const currentPage = ref(1)
+const pageSize = ref(10)
+const totalPages = computed(() => Math.ceil(searchResults.value.length / pageSize.value) || 1)
+
+// 计算当前页显示的结果
+const paginatedResults = computed(() => {
+  if (!searchResults.value || searchResults.value.length === 0) {
+    return []
+  }
+  
+  const start = (currentPage.value - 1) * pageSize.value
+  const end = start + pageSize.value
+  return searchResults.value.slice(start, end)
+})
+
+// 计算显示的页码范围
+const displayedPageNumbers = computed(() => {
+  const range = []
+  const maxVisiblePages = 5
+  
+  if (totalPages.value <= 0) {
+    return range
+  }
+  
+  const startPage = Math.max(1, currentPage.value - Math.floor(maxVisiblePages / 2))
+  const endPage = Math.min(totalPages.value, startPage + maxVisiblePages - 1)
+  
+  for (let i = startPage; i <= endPage; i++) {
+    range.push(i)
+  }
+  
+  return range
+})
+
 watch([() => props.geneA, () => props.geneB], ([geneA, geneB]) => {
   searchForm.gene1 = geneA || ''
   searchForm.gene2 = geneB || ''
@@ -169,6 +209,7 @@ const searchGenes = async () => {
   loading.value = true
   searchPerformed.value = true
   searchResults.value = [] // 清空之前的搜索结果
+  currentPage.value = 1 // 重置为第一页
 
   // 更新路由查询参数
   router.push({
@@ -200,6 +241,28 @@ const resetSearch = () => {
   searchForm.gene2 = ''
   searchResults.value = []
   searchPerformed.value = false
+  currentPage.value = 1
   router.push({ query: {} }) // Clear query parameters
+}
+
+// 页码变更
+const goToPage = (page) => {
+  if (page >= 1 && page <= totalPages.value) {
+    currentPage.value = page
+  }
+}
+
+// 上一页
+const goToPreviousPage = () => {
+  if (currentPage.value > 1) {
+    currentPage.value--
+  }
+}
+
+// 下一页
+const goToNextPage = () => {
+  if (currentPage.value < totalPages.value) {
+    currentPage.value++
+  }
 }
 </script>
