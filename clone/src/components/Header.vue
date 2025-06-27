@@ -1,16 +1,30 @@
 <template>
-  <header class="bg-primary dark:bg-primary-dark shadow-md sticky top-0 z-50 transition-colors duration-300">
-    <div class="container mx-auto px-8 pt-4 pb-4"> <!-- 用 pt/pb 替代 h-16 -->
+  <header class="bg-primary dark:bg-primary-dark h-35 shadow-md sticky top-0 z-50 transition-colors duration-300">
+    <div class="container mx-auto px-8 pt-4 pb-4"> 
       <div class="flex items-center justify-between">
-        <!-- Logo及副标题区域 -->
-        <div class="flex flex-col items-start"> 
-          <router-link to="/" class="flex items-center">
-            <span class="text-4xl font-bold text-white">Struct2SL</span>
+        <!-- Logo 及标题区域：改为 flex-row 横向布局 -->
+        <div class="flex items-center"> 
+          <!-- Logo -->
+          <router-link to="/" class="mr-4">
+            <img 
+              src="@/assets/logo.png" 
+              alt="Struct2SL Logo" 
+              class="h-30 w-30 rounded-full"  
+            >
           </router-link>
-          <!-- 新增副标题 -->
-          <p class="text-white text-lg opacity-90">Synthetic Lethality Prediction</p> 
+          <!-- 标题与副标题区域：改为 flex-col 纵向排列 -->
+          <div class="flex flex-col"> 
+            <!-- 主标题 -->
+            <router-link to="/" class="text-4xl font-bold text-white">
+              Struct2SL
+            </router-link>
+            <!-- 副标题 -->
+            <p class="text-white text-lg opacity-90">
+              Synthetic Lethality Prediction
+            </p> 
+          </div>
         </div>
-        
+
         <!-- 导航链接 -->
         <div class="flex items-center">
           <nav class="hidden md:flex space-x-8">

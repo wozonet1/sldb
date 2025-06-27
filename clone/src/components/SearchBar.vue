@@ -6,7 +6,7 @@
         type="text" 
         v-model="searchQuery" 
         class="flex-grow px-6 py-3 bg-white dark:bg-neutral-700 border border-gray-200 dark:border-gray-600 rounded-l-lg focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark focus:border-primary dark:focus:border-primary-dark transition-colors text-gray-800 dark:text-gray-200"
-        :placeholder="placeholder"
+        :placeholder="getPlaceholder()"
         aria-label="搜索基因对"
       >
       <button 
@@ -22,14 +22,14 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 
-const props = defineProps({
-  placeholder: {
-    type: String,
-    default: '搜索基因对...(例如: TSPAN1)'
-  }
-})
+const { t } = useI18n()
 
+// 获取双语占位符（通过i18n翻译）
+const getPlaceholder = () => {
+  return t('search.inputPlaceholder')  // 对应i18n中的翻译键
+}
 const router = useRouter()
 const searchQuery = ref('')
 

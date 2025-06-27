@@ -21,33 +21,22 @@
       <p class="text-gray-700 dark:text-gray-300 mb-4">
         {{ $t('about.sections.ourMission.content') }}
       </p>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
         <div class="flex flex-col items-center">
-          <div class="w-24 h-24 rounded-full bg-gray-200 dark:bg-gray-600 mb-4 overflow-hidden">
-            <img src="https://picsum.photos/seed/researcher1/200/200" alt="研究人员照片" class="w-full h-full object-cover">
-          </div>
-          <h3 class="font-semibold text-lg dark:text-white">张明博士</h3>
-          <p class="text-gray-500 dark:text-gray-400 text-sm mb-2">项目负责人</p>
-          <p class="text-gray-600 dark:text-gray-300 text-center text-sm">癌症基因组学专家，在合成致死领域有10年研究经验</p>
+          
+          <h3 class="font-semibold text-lg dark:text-white">{{$t('about.team.mem1.name')}}</h3>
+          <p class="text-gray-500 dark:text-gray-400 text-sm mb-2">{{$t('about.team.mem1.role')}}</p>
+          <p class="text-gray-600 dark:text-gray-300 text-center text-sm" v-html="$t('about.team.mem1.description')"></p>
         </div>
         
         <div class="flex flex-col items-center">
-          <div class="w-24 h-24 rounded-full bg-gray-200 dark:bg-gray-600 mb-4 overflow-hidden">
-            <img src="https://picsum.photos/seed/researcher2/200/200" alt="研究人员照片" class="w-full h-full object-cover">
-          </div>
-          <h3 class="font-semibold text-lg dark:text-white">李华博士</h3>
-          <p class="text-gray-500 dark:text-gray-400 text-sm mb-2">生物信息学家</p>
-          <p class="text-gray-600 dark:text-gray-300 text-center text-sm">专注于开发分析合成致死相互作用的算法和工具</p>
+         
+          <h3 class="font-semibold text-lg dark:text-white">{{$t('about.team.mem2.name')}}</h3>
+          <p class="text-gray-500 dark:text-gray-400 text-sm mb-2">{{$t('about.team.mem2.role')}}</p>
+          <p class="text-gray-600 dark:text-gray-300 text-center text-sm" v-html="$t('about.team.mem2.description')"></p>
         </div>
         
-        <div class="flex flex-col items-center">
-          <div class="w-24 h-24 rounded-full bg-gray-200 dark:bg-gray-600 mb-4 overflow-hidden">
-            <img src="https://picsum.photos/seed/researcher3/200/200" alt="研究人员照片" class="w-full h-full object-cover">
-          </div>
-          <h3 class="font-semibold text-lg dark:text-white">王芳博士</h3>
-          <p class="text-gray-500 dark:text-gray-400 text-sm mb-2">数据管理员</p>
-          <p class="text-gray-600 dark:text-gray-300 text-center text-sm">负责数据库的维护和更新，确保数据质量和完整性</p>
-        </div>
+        
       </div>
     </div>
     

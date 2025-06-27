@@ -1,5 +1,5 @@
 <template>
-  <div class="font-sans bg-white dark:bg-neutral-white-dark text-gray-800 dark:text-gray-200 min-h-screen flex flex-col transition-colors duration-300">
+  <div class="font-sans bg-white dark:bg-neutral-white-dark text-gray-800 dark:text-gray-200 min-h-screen   flex flex-col transition-colors duration-300">
     <!-- 顶部导航栏 -->
     <Header />
     

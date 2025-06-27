@@ -12,7 +12,7 @@
         <div>
           <h3 class="text-lg font-semibold mb-4">{{ t('footer.quickLinks.title') }}</h3>
           <ul class="space-y-2">
-            <li><a href="#" class="text-gray-400 dark:text-gray-300 hover:text-white transition-colors">{{ t('header.home') }}</a></li>
+            <li><a href="/" class="text-gray-400 dark:text-gray-300 hover:text-white transition-colors">{{ t('header.home') }}</a></li>
             <li><a href="/search" class="text-gray-400 dark:text-gray-300 hover:text-white transition-colors">{{ t('header.search') }}</a></li>
             <li><a href="about" class="text-gray-400 dark:text-gray-300 hover:text-white transition-colors">{{ t('header.about') }}</a></li>
           </ul>
