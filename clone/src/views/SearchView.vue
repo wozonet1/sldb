@@ -1,29 +1,29 @@
 <template>
   <div class="space-y-8">
-    <h1 class="text-3xl font-bold">{{ $t('search.title') }}</h1>
+    <h1 class="text-3xl font-bold dark:text-white">{{ $t('search.title') }}</h1>
     
     <!-- 搜索表单 -->
-    <div class="bg-white rounded-xl shadow-md p-6">
+    <div class="bg-white dark:bg-neutral-700 rounded-xl shadow-md p-6 transition-colors duration-300">
       <form @submit.prevent="searchGenes">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label for="gene1" class="block text-sm font-medium text-gray-700 mb-1">{{ $t('search.gene1') }}</label>
+            <label for="gene1" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">{{ $t('search.gene1') }}</label>
             <input 
               type="text" 
               id="gene1" 
               v-model="searchForm.gene1" 
-              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+              class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark focus:border-primary dark:focus:border-primary-dark transition-colors dark:bg-neutral-800 dark:text-white"
               :placeholder="$t('search.inputPlaceholder')"
             >
           </div>
           
           <div>
-            <label for="gene2" class="block text-sm font-medium text-gray-700 mb-1">{{ $t('search.gene2') }}</label>
+            <label for="gene2" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">{{ $t('search.gene2') }}</label>
             <input 
               type="text" 
               id="gene2" 
               v-model="searchForm.gene2" 
-              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+              class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark focus:border-primary dark:focus:border-primary-dark transition-colors dark:bg-neutral-800 dark:text-white"
               :placeholder="$t('search.inputPlaceholder')"
             >
           </div>
@@ -34,7 +34,7 @@
         <div class="mt-6 flex justify-end">
           <button 
             type="submit" 
-            class="px-6 py-2 bg-accent text-white rounded-lg hover:bg-accent-hover transition-colors"
+            class="px-6 py-2 bg-accent dark:bg-accent-dark text-white rounded-lg hover:bg-accent-hover dark:hover:bg-accent-hover-dark transition-colors"
           >
             <i class="fa fa-search mr-2"></i>{{ $t('search.searchButton') }}
           </button>
@@ -44,10 +44,10 @@
     <!-- 搜索结果：单个对象的特殊展示 -->
     <div 
       v-if="isSingleResult" 
-      class="bg-white rounded-xl shadow-md p-6 space-y-4"
+      class="bg-white dark:bg-neutral-700 rounded-xl shadow-md p-6 space-y-4 transition-colors duration-300"
     >
-      <h2 class="text-xl font-semibold">{{ $t('search.results') }} </h2>
-      <div class="space-y-2">
+      <h2 class="text-xl font-semibold dark:text-white">{{ $t('search.results') }} </h2>
+      <div class="space-y-2 dark:text-gray-200">
         <p><strong>{{ $t('search.table.gene1') }}:</strong> {{ searchResults.GeneA }}</p>
         <p><strong>{{ $t('search.table.gene2') }}:</strong> {{ searchResults.GeneB }}</p>
         <p><strong>{{ $t('search.table.predictionScore') }}:</strong> {{ searchResults.Prediction }}</p>
@@ -57,45 +57,45 @@
     </div>
 
    <!-- 多结果表格 + 分页 -->
-    <div v-else-if="hasResults" class="bg-white rounded-xl shadow-md overflow-hidden">
-      <div class="p-6 border-b border-gray-200">
+    <div v-else-if="hasResults" class="bg-white dark:bg-neutral-700 rounded-xl shadow-md overflow-hidden transition-colors duration-300">
+      <div class="p-6 border-b border-gray-200 dark:border-gray-600">
         
-        <h2 class="text-xl font-semibold">
+        <h2 class="text-xl font-semibold dark:text-white">
           {{ $t('search.results') }} ({{ searchResults.length }})
         </h2>
       </div>
 
       <!-- 表格：只渲染当前页数据 -->
       <div class="overflow-x-auto">
-        <table class="min-w-full divide-y divide-gray-200">
-          <thead class="bg-gray-100">
+        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
+          <thead class="bg-gray-100 dark:bg-neutral-600">
             <tr>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-semibold  uppercase tracking-wider">{{ $t('search.table.gene1') }}</th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-semibold  uppercase tracking-wider">{{ $t('search.table.gene2') }}</th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-semibold  uppercase tracking-wider">{{ $t('search.table.predictionScore') }}</th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-semibold  uppercase tracking-wider">{{ $t('search.table.predictingRelation') }}</th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-semibold  uppercase tracking-wider">{{ $t('search.table.source') }}</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider dark:text-gray-200">{{ $t('search.table.gene1') }}</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider dark:text-gray-200">{{ $t('search.table.gene2') }}</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider dark:text-gray-200">{{ $t('search.table.predictionScore') }}</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider dark:text-gray-200">{{ $t('search.table.predictingRelation') }}</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider dark:text-gray-200">{{ $t('search.table.source') }}</th>
             </tr>
           </thead>
-          <tbody class="bg-white divide-y divide-gray-200">
+          <tbody class="bg-white dark:bg-neutral-700 divide-y divide-gray-200 dark:divide-gray-600">
             <tr 
               v-for="(result, index) in paginatedResults" 
               :key="index" 
-              class="hover:bg-gray-50 transition-colors"
+              class="hover:bg-gray-50 dark:hover:bg-neutral-600 transition-colors"
             >
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
                 {{ result['Gene A'] }}
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
                 {{ result['Gene B'] }}
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
                 {{ result['Prediction score'] }}
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
                 {{ result['Predicting relation']?.slice(-3) === '_SL' ? 'SL' : 'nonSL' }}
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
                 {{ result['Predicting relation']?.slice(3) === 'new' ? 'Struct2SL' : 'SynlethDB' }}
               </td>
             </tr>
@@ -114,20 +114,20 @@
       />
     </div>
     <!-- 加载中状态 -->
-    <div v-else-if="loading" class="bg-white rounded-xl shadow-md p-8 text-center">
-      <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary mx-auto mb-4"></div>
-      <p class="text-gray-500">{{ $t('search.loading') }}</p>
+    <div v-else-if="loading" class="bg-white dark:bg-neutral-700 rounded-xl shadow-md p-8 text-center transition-colors duration-300">
+      <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary dark:border-primary-dark mx-auto mb-4"></div>
+      <p class="text-gray-500 dark:text-gray-300">{{ $t('search.loading') }}</p>
     </div>
     
     <!-- 无结果提示 -->
-    <div v-else-if="noResults" class="bg-white rounded-xl shadow-md p-8 text-center">
-      <div class="text-5xl text-gray-300 mb-4">
+    <div v-else-if="noResults" class="bg-white dark:bg-neutral-700 rounded-xl shadow-md p-8 text-center transition-colors duration-300">
+      <div class="text-5xl text-gray-300 dark:text-gray-500 mb-4">
         <i class="fa fa-search"></i>
       </div>
-      <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ $t('search.noResults.title') }}</h3>
-      <p class="text-gray-500 mb-6">{{ $t('search.noResults.suggestion') }}</p>
+      <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">{{ $t('search.noResults.title') }}</h3>
+      <p class="text-gray-500 dark:text-gray-300 mb-6">{{ $t('search.noResults.suggestion') }}</p>
       <button 
-        class="px-6 py-2 bg-accent text-white rounded-lg hover:bg-accent-hover transition-colors shadow-md"
+        class="px-6 py-2 bg-accent dark:bg-accent-dark text-white rounded-lg hover:bg-accent-hover dark:hover:bg-accent-hover-dark transition-colors shadow-md"
         @click="resetSearch"
       >
         {{ $t('search.noResults.reset') }}

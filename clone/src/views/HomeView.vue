@@ -1,7 +1,7 @@
 <template>
   <div class="space-y-8">
     <!-- 英雄区域 -->
-  <section class="bg-gradient-to-r from-blue-900 to-indigo-800 text-white py-20" style="background-image: url('./src/assets/bg-pattern.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center;">
+  <section class=" text-white py-20" style="background-image: url('./src/assets/bg-pattern.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center;">
     <div class="max-w-7xl mx-auto px-4">
       <div class="text-center mb-8">
         <h1 class="text-5xl md:text-6xl font-bold mb-6">
@@ -53,12 +53,12 @@
     </section>
     
    <!-- About Struct2SL 部分 -->
-    <section class="px-4 py-12 bg-gray-50">
+    <section class="px-4 py-12 bg-gray-50 dark:bg-neutral-800 transition-colors duration-300">
       <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:items-start">
         <div>
-          <h2 class="text-3xl font-bold mb-6">{{ $t('about.title') }}</h2>
-          <p class="text-gray-700 mb-5 text-xl leading-relaxed" style="max-width: 500px;">
-            {{ $t('about.description') }}  <a href="https://github.com/hyr-hit/Struct2SL/blob/main/User%20Guide%20for%20webserver.md" class="text-blue underline">{{$t('about.link')}}</a>.
+          <h2 class="text-3xl font-bold mb-6 dark:text-white">{{ $t('about.title') }}</h2>
+          <p class="text-gray-700 dark:text-gray-300 mb-5 text-xl leading-relaxed" style="max-width: 500px;">
+            {{ $t('about.description') }}  <a href="https://github.com/hyr-hit/Struct2SL/blob/main/User%20Guide%20for%20webserver.md" class="text-blue dark:text-blue-400 underline">{{$t('about.link')}}</a>.
           </p>
         </div>
         <div class="rounded-lg overflow-hidden shadow-lg">
@@ -69,49 +69,49 @@
     </section>
     
     <!-- Statistics of Struct2SL 部分 -->
-    <section class="px-4 py-12 bg-gray-50">
+    <section class="px-4 py-12 bg-gray-50 dark:bg-neutral-800 transition-colors duration-300">
       <div class="max-w-7xl mx-auto">
-        <h2 class="text-3xl font-bold mb-6">{{ $t('home.statistics.title') }}</h2>
+        <h2 class="text-3xl font-bold mb-6 dark:text-white">{{ $t('home.statistics.title') }}</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:items-start">
           <div>
-            <p class="text-gray-700 mb-4 text-xl leading-relaxed" style="max-width: 500px;">
+            <p class="text-gray-700 dark:text-gray-300 mb-4 text-xl leading-relaxed" style="max-width: 500px;">
               {{ $t('home.statistics.description') }}
             </p>
           </div>
           <div class="rounded-lg overflow-hidden shadow-lg">
             <!-- 表格部分 -->
-            <div class="bg-white p-4">
+            <div class="bg-white dark:bg-neutral-700 p-4">
               <table class="w-full border-collapse">
                 <thead>
-                  <tr class="bg-gray-100">
-                    <th class="border p-2 text-left">{{ $t('home.statistics.table.header.dataType') }}</th>
-                    <th class="border p-2 text-left">{{ $t('home.statistics.table.header.entityCount') }}</th>
+                  <tr class="bg-gray-100 dark:bg-neutral-600">
+                    <th class="border dark:border-neutral-500 p-2 text-left dark:text-white">{{ $t('home.statistics.table.header.dataType') }}</th>
+                    <th class="border dark:border-neutral-500 p-2 text-left dark:text-white">{{ $t('home.statistics.table.header.entityCount') }}</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td class="border p-2">{{ $t('home.statistics.table.rows.syntheticLethalPairs') }}</td>
-                    <td class="border p-2">23749</td>
+                  <tr class="dark:text-gray-200">
+                    <td class="border dark:border-neutral-500 p-2">{{ $t('home.statistics.table.rows.syntheticLethalPairs') }}</td>
+                    <td class="border dark:border-neutral-500 p-2">23749</td>
                   </tr>
-                  <tr>
-                    <td class="border p-2">{{ $t('home.statistics.table.rows.nonsyntheticLethalPairs') }}</td>
-                    <td class="border p-2">103613</td>
+                  <tr class="dark:text-gray-200">
+                    <td class="border dark:border-neutral-500 p-2">{{ $t('home.statistics.table.rows.nonsyntheticLethalPairs') }}</td>
+                    <td class="border dark:border-neutral-500 p-2">103613</td>
                   </tr>
-                  <tr>
-                    <td class="border p-2">{{ $t('home.statistics.table.rows.proteinSequence') }}</td>
-                    <td class="border p-2">20504</td>
+                  <tr class="dark:text-gray-200">
+                    <td class="border dark:border-neutral-500 p-2">{{ $t('home.statistics.table.rows.proteinSequence') }}</td>
+                    <td class="border dark:border-neutral-500 p-2">20504</td>
                   </tr>
-                  <tr>
-                    <td class="border p-2">{{ $t('home.statistics.table.rows.ppiNodesCount') }}</td>
-                    <td class="border p-2">17740</td>
+                  <tr class="dark:text-gray-200">
+                    <td class="border dark:border-neutral-500 p-2">{{ $t('home.statistics.table.rows.ppiNodesCount') }}</td>
+                    <td class="border dark:border-neutral-500 p-2">17740</td>
                   </tr>
-                  <tr>
-                    <td class="border p-2">{{ $t('home.statistics.table.rows.ppiEdgesCount') }}</td>
-                    <td class="border p-2">1477610</td>
+                  <tr class="dark:text-gray-200">
+                    <td class="border dark:border-neutral-500 p-2">{{ $t('home.statistics.table.rows.ppiEdgesCount') }}</td>
+                    <td class="border dark:border-neutral-500 p-2">1477610</td>
                   </tr>
-                  <tr>
-                    <td class="border p-2">{{ $t('home.statistics.table.rows.proteinStructure') }}</td>
-                    <td class="border p-2">23391</td>
+                  <tr class="dark:text-gray-200">
+                    <td class="border dark:border-neutral-500 p-2">{{ $t('home.statistics.table.rows.proteinStructure') }}</td>
+                    <td class="border dark:border-neutral-500 p-2">23391</td>
                   </tr>
                 </tbody>
               </table>

@@ -51,7 +51,7 @@ export default {
     title: '搜索基因对',
     gene1: '基因 1',
     gene2: '基因 2(可选)',
-    inputPlaceholder: '输入基因名称',
+    inputPlaceholder: '输入基因名称(如TSPAN1)',
     searchButton: '搜索',
     results: '搜索结果',
     table: {
@@ -67,7 +67,10 @@ export default {
       of: '条，共',
       results: '条结果',
       previous: '上一页',
-      next: '下一页'
+      next: '下一页',
+      goToPage: '跳转到第',
+      Page: '页',
+      go: '跳转',
     },
     noResults: {
       title: '未找到匹配结果',
@@ -80,6 +83,27 @@ export default {
     title: '关于 Struct2SL',
     description: 'Struct2SL是一个专注于合成致死基因对的数据库，为癌症治疗提供潜在靶点。若想要了解更多信息,请点击',
     link: '这里',
+    team:{
+        mem1:{
+          name: '王轩',
+          role: '指导创业计划执行',
+          description: "指导创业计划执行<br>\
+                        哈工大（深圳）教授<br>\
+                        哈深资产公司董事长<br>\
+                      哈工大决策智能研究所所长<br>\
+                    哈工大（深圳）计算机应用研究中心主任<br>\
+                    广东省人工智能与机器人学会监事长等"
+        },
+        mem2:{
+          name: '李君一',
+          role: '指导合成致死算法开发',
+          description: "哈工大（深圳）教授<br>\
+                        博士生导师<br>\
+                        发表60多篇国际期刊和会议文章<br>\
+                        国家重点研发计划项目课题负责人<br>\
+                        国家自然科学基金面上项目主持人"
+        },
+    },
     sections: {
       whatIs: {
         title: '什么是合成致死？',
@@ -89,13 +113,16 @@ export default {
         title: '我们的使命',
         content: '我们致力于通过整合多种数据源和先进的计算方法，预测和验证合成致死基因对，为癌症精准治疗提供科学依据。'
       },
+      
+      
       contact: {
         title: '联系我们',
         email: '邮箱',
         phone: '电话'
       }
     }
-  },
+  }
+  ,
   footer: {
     about: {
       title: '关于 Struct2SL',

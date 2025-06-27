@@ -51,7 +51,7 @@ export default {
     title: 'Search Gene Pairs',
     gene1: 'Gene 1',
     gene2: 'Gene 2 (Optional)',
-    inputPlaceholder: 'Enter gene name',
+    inputPlaceholder: 'Enter gene name(TSPAN1)',
     searchButton: 'Search',
     results: 'Search Results',
     table: {
@@ -67,7 +67,10 @@ export default {
       of: 'of',
       results: 'results',
       previous: 'Previous',
-      next: 'Next'
+      next: 'Next',
+      goToPage: 'go to page',
+      Page: '',
+      go: 'Go ',
     },
     noResults: {
       title: 'No Matching Results Found',
@@ -81,6 +84,27 @@ export default {
     description: 'Struct2SL is a database focused on synthetic lethality gene pairs, providing potential targets for cancer treatment. For\
             more detailed instructions, please refer to',
     link: 'here',
+    team: {
+      mem1: {
+        name: 'Xuan Wang',
+        role: 'Advising Startup Program Execution',
+        description: "Advising Startup Program Execution<br>\
+                      Professor at Harbin Institute of Technology (Shenzhen)<br>\
+                      Chairman of HIT Shenzhen Asset Management Co., Ltd.<br>\
+                      Director of the Institute of Decision Intelligence at HIT<br>\
+                      Director of the Computer Application Research Center at HIT (Shenzhen)<br>\
+                      Supervisor of the Guangdong Society for Artificial Intelligence and Robotics"
+      },
+      mem2: {
+        name: 'Junyi Li',
+        role: 'Advising Synthetic Lethality Algorithm Development',
+        description: "Professor at Harbin Institute of Technology (Shenzhen)<br>\
+                      Doctoral Supervisor<br>\
+                      Author of over 60 international journal and conference papers<br>\
+                      Principal Investigator of National Key R&D Program Projects<br>\
+                      Host of National Natural Science Foundation General Projects"
+      },
+    },
     sections: {
       whatIs: {
         title: 'What is Synthetic Lethality?',
