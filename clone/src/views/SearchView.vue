@@ -68,13 +68,13 @@
       <!-- 表格：只渲染当前页数据 -->
       <div class="overflow-x-auto">
         <table class="min-w-full divide-y divide-gray-200">
-          <thead class="bg-gray-50">
+          <thead class="bg-gray-100">
             <tr>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">{{ $t('search.table.gene1') }}</th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">{{ $t('search.table.gene2') }}</th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">{{ $t('search.table.predictionScore') }}</th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">{{ $t('search.table.predictingRelation') }}</th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">{{ $t('search.table.source') }}</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-semibold  uppercase tracking-wider">{{ $t('search.table.gene1') }}</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-semibold  uppercase tracking-wider">{{ $t('search.table.gene2') }}</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-semibold  uppercase tracking-wider">{{ $t('search.table.predictionScore') }}</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-semibold  uppercase tracking-wider">{{ $t('search.table.predictingRelation') }}</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-semibold  uppercase tracking-wider">{{ $t('search.table.source') }}</th>
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">

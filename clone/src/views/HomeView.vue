@@ -41,7 +41,6 @@
           <template #date>{{ $t('home.updates.newBreastCancer.date') }}</template>
         </UpdateCard>
         
-        <!-- 可以轻松添加更多更新卡片 -->
         <UpdateCard>
           <template #icon>
             <i class="fa fa-code"></i>
@@ -59,8 +58,7 @@
         <div>
           <h2 class="text-3xl font-bold mb-6">{{ $t('about.title') }}</h2>
           <p class="text-gray-700 mb-5 text-xl leading-relaxed" style="max-width: 500px;">
-            {{ $t('about.description') }} For
-            more detailed instructions, please refer to <a href="https://github.com/hyr-hit/Struct2SL/blob/main/User%20Guide%20for%20webserver.md" class="text-primary hover:underline">here</a>.
+            {{ $t('about.description') }}  <a href="https://github.com/hyr-hit/Struct2SL/blob/main/User%20Guide%20for%20webserver.md" class="text-blue underline">{{$t('about.link')}}</a>.
           </p>
         </div>
         <div class="rounded-lg overflow-hidden shadow-lg">

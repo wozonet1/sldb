@@ -6,7 +6,7 @@ export default {
     language: '语言'
   },
   home: {
-    welcome: 'Welcome to Struct2SL',
+    welcome: '欢迎使用 Struct2SL',
     subtitle: '发现合成致死基因对并深入了解基因相互作用。',
     searchPlaceholder: '搜索基因对...(例如: TSPAN1)',
     stats: {
@@ -78,7 +78,8 @@ export default {
   },
   about: {
     title: '关于 Struct2SL',
-    description: 'Struct2SL是一个专注于合成致死基因对的数据库，为癌症治疗提供潜在靶点。',
+    description: 'Struct2SL是一个专注于合成致死基因对的数据库，为癌症治疗提供潜在靶点。若想要了解更多信息,请点击',
+    link: '这里',
     sections: {
       whatIs: {
         title: '什么是合成致死？',

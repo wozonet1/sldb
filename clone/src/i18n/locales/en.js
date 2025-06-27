@@ -78,7 +78,9 @@ export default {
   },
   about: {
     title: 'About Struct2SL',
-    description: 'Struct2SL is a database focused on synthetic lethality gene pairs, providing potential targets for cancer treatment.',
+    description: 'Struct2SL is a database focused on synthetic lethality gene pairs, providing potential targets for cancer treatment. For\
+            more detailed instructions, please refer to',
+    link: 'here',
     sections: {
       whatIs: {
         title: 'What is Synthetic Lethality?',
