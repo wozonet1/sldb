@@ -67,7 +67,10 @@ export default {
       of: '条，共',
       results: '条结果',
       previous: '上一页',
-      next: '下一页'
+      next: '下一页',
+      goToPage: '跳转到第',
+      Page: '页',
+      go: '跳转',
     },
     noResults: {
       title: '未找到匹配结果',

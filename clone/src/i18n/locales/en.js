@@ -67,7 +67,10 @@ export default {
       of: 'of',
       results: 'results',
       previous: 'Previous',
-      next: 'Next'
+      next: 'Next',
+      goToPage: 'go to page',
+      Page: '',
+      go: 'Go ',
     },
     noResults: {
       title: 'No Matching Results Found',

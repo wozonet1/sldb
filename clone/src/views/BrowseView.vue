@@ -1,16 +1,16 @@
 <template>
   <div class="space-y-8">
-    <h1 class="text-3xl font-bold">浏览基因对</h1>
+    <h1 class="text-3xl font-bold dark:text-white transition-colors duration-300">浏览基因对</h1>
     
     <!-- 筛选条件 -->
-    <div class="bg-white rounded-xl shadow-md p-6">
+    <div class="bg-white dark:bg-neutral-800 rounded-xl shadow-md p-6 transition-colors duration-300">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div>
-          <label for="cancerTypeFilter" class="block text-sm font-medium text-gray-700 mb-1">癌症类型</label>
+          <label for="cancerTypeFilter" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 transition-colors duration-300">癌症类型</label>
           <select 
             id="cancerTypeFilter" 
             v-model="filterOptions.cancerType" 
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+            class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-neutral-700 text-gray-700 dark:text-gray-200 rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark focus:border-primary dark:focus:border-primary-dark transition-colors duration-300"
           >
             <option value="">所有类型</option>
             <option value="breast">乳腺癌</option>
@@ -22,11 +22,11 @@
         </div>
         
         <div>
-          <label for="evidenceLevelFilter" class="block text-sm font-medium text-gray-700 mb-1">证据水平</label>
+          <label for="evidenceLevelFilter" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 transition-colors duration-300">证据水平</label>
           <select 
             id="evidenceLevelFilter" 
             v-model="filterOptions.evidenceLevel" 
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+            class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-neutral-700 text-gray-700 dark:text-gray-200 rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark focus:border-primary dark:focus:border-primary-dark transition-colors duration-300"
           >
             <option value="">所有水平</option>
             <option value="high">高</option>
@@ -36,11 +36,11 @@
         </div>
         
         <div>
-          <label for="sortBy" class="block text-sm font-medium text-gray-700 mb-1">排序方式</label>
+          <label for="sortBy" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 transition-colors duration-300">排序方式</label>
           <select 
             id="sortBy" 
             v-model="filterOptions.sortBy" 
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
+            class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-neutral-700 text-gray-700 dark:text-gray-200 rounded-lg focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark focus:border-primary dark:focus:border-primary-dark transition-colors duration-300"
           >
             <option value="gene1">基因1 (A-Z)</option>
             <option value="-gene1">基因1 (Z-A)</option>
@@ -58,19 +58,19 @@
       <div 
         v-for="(genePair, index) in filteredGenePairs" 
         :key="index" 
-        class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+        class="bg-white dark:bg-neutral-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300"
       >
         <div class="p-6">
           <div class="flex items-center justify-between mb-4">
             <div>
-              <h3 class="font-semibold text-lg">{{ genePair.gene1 }} - {{ genePair.gene2 }}</h3>
-              <p class="text-sm text-gray-500">{{ genePair.cancerType }}</p>
+              <h3 class="font-semibold text-lg dark:text-white transition-colors duration-300">{{ genePair.gene1 }} - {{ genePair.gene2 }}</h3>
+              <p class="text-sm text-gray-500 dark:text-gray-400 transition-colors duration-300">{{ genePair.cancerType }}</p>
             </div>
             <span 
               :class="{
-                'px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800': genePair.evidenceLevel === 'high',
-                'px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800': genePair.evidenceLevel === 'medium',
-                'px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800': genePair.evidenceLevel === 'low'
+                'px-2 py-1 text-xs font-semibold rounded-full bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-100': genePair.evidenceLevel === 'high',
+                'px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-100': genePair.evidenceLevel === 'medium',
+                'px-2 py-1 text-xs font-semibold rounded-full bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100': genePair.evidenceLevel === 'low'
               }"
             >
               {{ genePair.evidenceLevel }}
@@ -78,18 +78,18 @@
           </div>
           
           <div class="mb-4">
-            <p class="text-sm text-gray-600">
+            <p class="text-sm text-gray-600 dark:text-gray-300 transition-colors duration-300">
               {{ genePair.description }}
             </p>
           </div>
           
           <div class="flex justify-between items-center">
-            <div class="text-sm text-gray-500">
+            <div class="text-sm text-gray-500 dark:text-gray-400 transition-colors duration-300">
               <span class="flex items-center">
                 <i class="fa fa-flask mr-1"></i> {{ genePair.experiments }} 实验
               </span>
             </div>
-            <button class="text-primary hover:text-primary/80 transition-colors">
+            <button class="text-primary dark:text-primary-dark hover:text-primary/80 dark:hover:text-primary-dark/80 transition-colors duration-300">
               查看详情 <i class="fa fa-arrow-right ml-1"></i>
             </button>
           </div>
@@ -100,7 +100,7 @@
     <!-- 加载更多 -->
     <div class="text-center mt-8">
       <button 
-        class="px-6 py-3 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors shadow-sm"
+        class="px-6 py-3 bg-white dark:bg-neutral-800 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-neutral-700 text-gray-700 dark:text-gray-200 transition-colors duration-300 shadow-sm"
         @click="loadMore"
       >
         加载更多 <i class="fa fa-spinner ml-2" :class="{ 'animate-spin': loading }"></i>
@@ -219,4 +219,4 @@ const loadMore = () => {
 onMounted(() => {
   // 页面加载时可以执行一些初始化操作
 })
-</script>  
+</script>

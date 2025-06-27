@@ -5,13 +5,13 @@
       <input 
         type="text" 
         v-model="searchQuery" 
-        class="flex-grow px-6 py-3 bg-white border border-gray-200 rounded-l-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors text-gray-800"
+        class="flex-grow px-6 py-3 bg-white dark:bg-neutral-700 border border-gray-200 dark:border-gray-600 rounded-l-lg focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark focus:border-primary dark:focus:border-primary-dark transition-colors text-gray-800 dark:text-gray-200"
         :placeholder="placeholder"
         aria-label="搜索基因对"
       >
       <button 
         type="submit" 
-        class="px-8 py-3 bg-accent text-white rounded-r-lg hover:bg-accent-hover transition-colors"
+        class="px-8 py-3 bg-accent dark:bg-accent-dark text-white rounded-r-lg hover:bg-accent-hover dark:hover:bg-accent transition-colors"
       >
         Search
       </button>
