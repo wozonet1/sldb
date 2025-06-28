@@ -227,7 +227,7 @@ const searchGenes = async () => {
   })
 
   try {
-    const response = await axios.get('http://localhost:5555/predict', {
+    const response = await axios.get('http://120.76.218.216:5555/predict', {
       params: {
         geneA: searchForm.gene1,
         geneB: searchForm.gene2

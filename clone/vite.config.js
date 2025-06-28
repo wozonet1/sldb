@@ -1,4 +1,4 @@
-import { fileURLToPath, URL } from 'node:url'
+import path from 'path'
 
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
@@ -16,7 +16,7 @@ export default defineConfig({
   resolve: {
     extensions: ['.js', '.json', '.vue'], // 确保支持 .vue 文件扩展名
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': path.resolve(__dirname, './src'), // 设置 '@' 别名指向 src 目录
     },
   },
 })

@@ -1,7 +1,7 @@
 <template>
   <div class="space-y-8">
     <!-- 英雄区域 -->
-  <section class=" text-white py-20" style="background-image: url('./src/assets/bg-pattern.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center;">
+  <section class=" text-white py-20" style="background-image: url('/bg-pattern.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center;">
     <div class="max-w-7xl mx-auto px-4">
       <div class="text-center mb-8">
         <h1 class="text-5xl md:text-6xl font-bold mb-6">
@@ -128,9 +128,9 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import SearchBar from '../components/SearchBar.vue'
-import UpdateCard from '../components/UpdateCard.vue'
-import StatCard from '../components/StatCard.vue'
+import SearchBar from '@/components/SearchBar.vue'
+import UpdateCard from '@/components/UpdateCard.vue'
+import StatCard from '@/components/StatCard.vue'
 
 // 获取i18n实例
 const { t } = useI18n()
