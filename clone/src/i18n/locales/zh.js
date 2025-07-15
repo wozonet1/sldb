@@ -45,6 +45,17 @@ export default {
           proteinStructure: '蛋白质空间结构'
         }
       }
+    },
+    images:{
+      gse135927:{
+        description: 'GSE135927 数据集',
+      },
+      gse137912:{
+        description: 'GSE137912 数据集',
+      },
+      gse200997:{
+        description: 'GSE200997 数据集',
+      }
     }
   },
   search: {

@@ -45,6 +45,17 @@ export default {
           proteinStructure: 'Protein spatial structure'
         }
       }
+    },
+    images:{
+      gse135927:{
+        description: 'GSE135927 Dataset',
+      },
+      gse137912:{
+        description: 'GSE137912 Dataset',
+      },
+      gse200997:{
+        description: 'GSE200997 Dataset',
+      }
     }
   },
   search: {

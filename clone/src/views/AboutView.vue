@@ -21,23 +21,8 @@
       <p class="text-gray-700 dark:text-gray-300 mb-4">
         {{ $t('about.sections.ourMission.content') }}
       </p>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-        <div class="flex flex-col items-center">
-          
-          <h3 class="font-semibold text-lg dark:text-white">{{$t('about.team.mem1.name')}}</h3>
-          <p class="text-gray-500 dark:text-gray-400 text-sm mb-2">{{$t('about.team.mem1.role')}}</p>
-          <p class="text-gray-600 dark:text-gray-300 text-center text-sm" v-html="$t('about.team.mem1.description')"></p>
-        </div>
-        
-        <div class="flex flex-col items-center">
-         
-          <h3 class="font-semibold text-lg dark:text-white">{{$t('about.team.mem2.name')}}</h3>
-          <p class="text-gray-500 dark:text-gray-400 text-sm mb-2">{{$t('about.team.mem2.role')}}</p>
-          <p class="text-gray-600 dark:text-gray-300 text-center text-sm" v-html="$t('about.team.mem2.description')"></p>
-        </div>
-        
-        
-      </div>
+      
+      
     </div>
     
 

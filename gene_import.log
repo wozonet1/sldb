@@ -1,0 +1,184 @@
+2025-07-15 16:46:17,685 - INFO - move_data - 共找到 2 个CSV文件
+2025-07-15 16:46:17,880 - INFO - move_data - 数据库 gene_prediction 不存在，已自动创建
+2025-07-15 16:46:18,244 - ERROR - move_data - 创建表时出错: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'COMMENT '强制A ID < B ID，保证无方向性'
+        ) ENGINE=InnoDB DEFAULT' at line 13
+Traceback (most recent call last):
+  File "/home/woz/wsl/lib/python3.13/site-packages/mysql/connector/connection_cext.py", line 772, in cmd_query
+    self._cmysql.query(
+    ~~~~~~~~~~~~~~~~~~^
+        query,
+        ^^^^^^
+    ...<3 lines>...
+        query_attrs=self.query_attrs,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+_mysql_connector.MySQLInterfaceError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'COMMENT '强制A ID < B ID，保证无方向性'
+        ) ENGINE=InnoDB DEFAULT' at line 13
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/woz/work_learn/clone/move_data.py", line 112, in create_tables
+    cursor.execute("""
+    ~~~~~~~~~~~~~~^^^^
+    CREATE TABLE IF NOT EXISTS predictions (
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<12 lines>...
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    """)
+    ^^^^
+  File "/home/woz/wsl/lib/python3.13/site-packages/mysql/connector/cursor_cext.py", line 356, in execute
+    self._connection.cmd_query(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._stmt_partition["mappable_stmt"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        raw_as_string=self._raw_as_string,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/woz/wsl/lib/python3.13/site-packages/mysql/connector/opentelemetry/context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "/home/woz/wsl/lib/python3.13/site-packages/mysql/connector/connection_cext.py", line 781, in cmd_query
+    raise get_mysql_exception(
+        err.errno, msg=err.msg, sqlstate=err.sqlstate
+    ) from err
+mysql.connector.errors.ProgrammingError: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'COMMENT '强制A ID < B ID，保证无方向性'
+        ) ENGINE=InnoDB DEFAULT' at line 13
+2025-07-15 16:46:18,270 - INFO - move_data - 已加载 0 个已有基因到缓存
+2025-07-15 16:46:18,273 - INFO - move_data - 已加载 0 个已有GO注释到缓存
+2025-07-15 16:46:18,274 - INFO - move_data - 共发现 2 个CSV文件，开始批量导入...
+2025-07-15 16:46:18,274 - INFO - move_data - 处理文件 1/2: ACSS2.csv
+2025-07-15 16:46:18,275 - INFO - move_data - 开始处理文件: ACSS2.csv
+2025-07-15 16:46:18,275 - INFO - move_data - 在文件 ACSS2.csv 中找到GSE列: ['GSE135927', 'GSE137912', 'GSE200997']
+2025-07-15 16:46:26,658 - ERROR - move_data - 文件 ACSS2.csv 处理时发生意外错误: 1146 (42S02): Table 'gene_prediction.predictions' doesn't exist
+Traceback (most recent call last):
+  File "/home/woz/wsl/lib/python3.13/site-packages/mysql/connector/connection_cext.py", line 772, in cmd_query
+    self._cmysql.query(
+    ~~~~~~~~~~~~~~~~~~^
+        query,
+        ^^^^^^
+    ...<3 lines>...
+        query_attrs=self.query_attrs,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+_mysql_connector.MySQLInterfaceError: Table 'gene_prediction.predictions' doesn't exist
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/woz/work_learn/clone/move_data.py", line 297, in import_single_csv
+    cursor.executemany("""
+    ~~~~~~~~~~~~~~~~~~^^^^
+        INSERT IGNORE INTO predictions (gene_a_id, gene_b_id, prediction_score,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        binary_prediction, label, gse_source, gse_data)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        VALUES (%s, %s, %s, %s, %s, %s, %s)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    """, prediction_batch)
+    ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/woz/wsl/lib/python3.13/site-packages/mysql/connector/cursor_cext.py", line 476, in executemany
+    return self.execute(cast(str, stmt))
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/woz/wsl/lib/python3.13/site-packages/mysql/connector/cursor_cext.py", line 356, in execute
+    self._connection.cmd_query(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._stmt_partition["mappable_stmt"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        raw_as_string=self._raw_as_string,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/woz/wsl/lib/python3.13/site-packages/mysql/connector/opentelemetry/context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "/home/woz/wsl/lib/python3.13/site-packages/mysql/connector/connection_cext.py", line 781, in cmd_query
+    raise get_mysql_exception(
+        err.errno, msg=err.msg, sqlstate=err.sqlstate
+    ) from err
+mysql.connector.errors.ProgrammingError: 1146 (42S02): Table 'gene_prediction.predictions' doesn't exist
+2025-07-15 16:46:26,764 - INFO - move_data - 处理文件 2/2: AGL.csv
+2025-07-15 16:46:26,765 - INFO - move_data - 开始处理文件: AGL.csv
+2025-07-15 16:46:26,766 - INFO - move_data - 在文件 AGL.csv 中找到GSE列: ['GSE135927', 'GSE137912', 'GSE200997']
+2025-07-15 16:46:33,219 - ERROR - move_data - 文件 AGL.csv 处理时发生意外错误: 1146 (42S02): Table 'gene_prediction.predictions' doesn't exist
+Traceback (most recent call last):
+  File "/home/woz/wsl/lib/python3.13/site-packages/mysql/connector/connection_cext.py", line 772, in cmd_query
+    self._cmysql.query(
+    ~~~~~~~~~~~~~~~~~~^
+        query,
+        ^^^^^^
+    ...<3 lines>...
+        query_attrs=self.query_attrs,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+_mysql_connector.MySQLInterfaceError: Table 'gene_prediction.predictions' doesn't exist
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/woz/work_learn/clone/move_data.py", line 297, in import_single_csv
+    cursor.executemany("""
+    ~~~~~~~~~~~~~~~~~~^^^^
+        INSERT IGNORE INTO predictions (gene_a_id, gene_b_id, prediction_score,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        binary_prediction, label, gse_source, gse_data)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        VALUES (%s, %s, %s, %s, %s, %s, %s)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    """, prediction_batch)
+    ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/woz/wsl/lib/python3.13/site-packages/mysql/connector/cursor_cext.py", line 476, in executemany
+    return self.execute(cast(str, stmt))
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/woz/wsl/lib/python3.13/site-packages/mysql/connector/cursor_cext.py", line 356, in execute
+    self._connection.cmd_query(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._stmt_partition["mappable_stmt"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        raw_as_string=self._raw_as_string,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/woz/wsl/lib/python3.13/site-packages/mysql/connector/opentelemetry/context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "/home/woz/wsl/lib/python3.13/site-packages/mysql/connector/connection_cext.py", line 781, in cmd_query
+    raise get_mysql_exception(
+        err.errno, msg=err.msg, sqlstate=err.sqlstate
+    ) from err
+mysql.connector.errors.ProgrammingError: 1146 (42S02): Table 'gene_prediction.predictions' doesn't exist
+2025-07-15 16:46:33,250 - INFO - move_data - 所有文件处理完成，本次累计新增预测记录: 0
+2025-07-15 16:46:33,253 - INFO - move_data - 数据库连接已关闭
+2025-07-15 16:46:33,253 - INFO - move_data - 程序执行完毕
+2025-07-15 16:50:11,187 - INFO - move_data - 共找到 2 个CSV文件
+2025-07-15 16:50:11,276 - INFO - move_data - 成功连接到数据库: gene_prediction
+2025-07-15 16:50:11,548 - INFO - move_data - 表结构创建/验证成功
+2025-07-15 16:50:11,556 - INFO - move_data - 已加载 0 个已有基因到缓存
+2025-07-15 16:50:11,558 - INFO - move_data - 已加载 0 个已有GO注释到缓存
+2025-07-15 16:50:11,559 - INFO - move_data - 共发现 2 个CSV文件，开始批量导入...
+2025-07-15 16:50:11,559 - INFO - move_data - 处理文件 1/2: ACSS2.csv
+2025-07-15 16:50:11,561 - INFO - move_data - 开始处理文件: ACSS2.csv
+2025-07-15 16:50:11,561 - INFO - move_data - 在文件 ACSS2.csv 中找到GSE列: ['GSE135927', 'GSE137912', 'GSE200997']
+2025-07-15 16:50:23,857 - INFO - move_data - 文件 ACSS2.csv 已批量插入 1000 条记录（新增 1000 条）
+2025-07-15 16:50:35,649 - INFO - move_data - 文件 ACSS2.csv 已批量插入 1000 条记录（新增 1000 条）
+2025-07-15 16:50:47,681 - INFO - move_data - 文件 ACSS2.csv 已批量插入 1000 条记录（新增 1000 条）
+2025-07-15 16:50:59,866 - INFO - move_data - 文件 ACSS2.csv 已批量插入 1000 条记录（新增 1000 条）
+2025-07-15 16:51:11,030 - INFO - move_data - 文件 ACSS2.csv 已批量插入 1000 条记录（新增 1000 条）
+2025-07-15 16:51:21,824 - INFO - move_data - 文件 ACSS2.csv 已批量插入 1000 条记录（新增 1000 条）
+2025-07-15 16:51:27,024 - INFO - move_data - 文件 ACSS2.csv 剩余记录插入完成（新增 444 条）
+2025-07-15 16:51:27,025 - INFO - move_data - 文件 ACSS2.csv 处理完成，总记录数: 6444，新增预测记录: 6444
+2025-07-15 16:51:27,025 - INFO - move_data - 处理文件 2/2: AGL.csv
+2025-07-15 16:51:27,027 - INFO - move_data - 开始处理文件: AGL.csv
+2025-07-15 16:51:27,027 - INFO - move_data - 在文件 AGL.csv 中找到GSE列: ['GSE135927', 'GSE137912', 'GSE200997']
+2025-07-15 16:51:33,081 - INFO - move_data - 文件 AGL.csv 已批量插入 1000 条记录（新增 1000 条）
+2025-07-15 16:51:37,482 - INFO - move_data - 文件 AGL.csv 已批量插入 1000 条记录（新增 1000 条）
+2025-07-15 16:51:40,153 - INFO - move_data - 文件 AGL.csv 剩余记录插入完成（新增 611 条）
+2025-07-15 16:51:40,154 - INFO - move_data - 文件 AGL.csv 处理完成，总记录数: 2611，新增预测记录: 2611
+2025-07-15 16:51:40,155 - INFO - move_data - 所有文件处理完成，本次累计新增预测记录: 9055
+2025-07-15 16:51:40,158 - INFO - move_data - 数据库连接已关闭
+2025-07-15 16:51:40,159 - INFO - move_data - 程序执行完毕
