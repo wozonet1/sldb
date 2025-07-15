@@ -16,25 +16,24 @@ type GeneInfo struct {
 }
 
 // PredictionResponse 是最终返回给前端的、包含丰富信息的预测结果结构。
-// 这将是我们将要构建并返回给前端的最终JSON对象。
 type PredictionResponse struct {
 	GeneA           *GeneInfo `json:"geneA"`
 	GeneB           *GeneInfo `json:"geneB"`
 	PredictionScore float64   `json:"predictionScore"`
-	Label           string    `json:"label"` // 预测来源
-	GseSource       *string   `json:"gseSource"`
+	Label           string    `json:"label"`
+	GseSource       *string   `json:"gseSource"` // 使用指针处理可能的NULL值
+	GseData         *string   `json:"gseData"`
 }
 
 // FlatDBResult 是一个临时的内部结构体，用于方便地从数据库的扁平化查询结果中扫描数据。
-// 我们从数据库中查出这样的扁平结构，然后在Go代码中将其组装成嵌套的 PredictionResponse。
 type FlatDBResult struct {
 	GeneASymbol     string
 	GeneBSymbol     string
 	PredictionScore float64
 	Label           string
-	GseSource       sql.NullString // 使用 sql.NullString 处理可能为NULL的GSE字段
+	GseSource       sql.NullString
+	GseData         sql.NullString
 
-	// GO注释相关字段，这些可能为NULL
 	GeneAGoID          sql.NullString
 	GeneAGoDescription sql.NullString
 	GeneBGoID          sql.NullString

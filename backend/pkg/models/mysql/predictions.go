@@ -3,65 +3,126 @@ package mysql
 
 import (
 	"database/sql"
-	"errors" // 用于处理特定的数据库错误
+	"errors"
 
-	"geneprediction.wozonet.net/pkg/models" // 导入我们定义的模型
+	"geneprediction.wozonet.net/pkg/models"
 )
 
-// 定义一个自定义错误，当查询不到记录时返回，便于上层处理。
-var ErrNoRecord = errors.New("models: no matching record found")
+var ErrNoRecord = errors.New("models: no matching SL relation record found")
+var ErrNoGene = errors.New("models: no matching gene found")
+var ErrNoGOAnnotation = errors.New("models: no matching GO annotation found")
 
-// PredictionModel 封装了数据库连接池。
 type PredictionModel struct {
 	DB *sql.DB
 }
 
-// GetOne 查询单个基因对的预测记录。
-func (m *PredictionModel) GetOne(geneA, geneB string) (*models.Prediction, error) {
-	// 我们的Python脚本逻辑是A,B都可以查，但数据库里是标准化的
-	// 为了简化，我们假设查询时也会尝试标准化查询
-	// 如果gene_predictions表不是标准化的，这里的逻辑需要调整
-	stmt := `SELECT GeneA, GeneB, Prediction, label AS PredictingRelation, BinaryPrediction, label
-             FROM gene_predictions WHERE (GeneA = ? AND GeneB = ?) OR (GeneA = ? AND GeneB = ?)`
+// GetByGenePair 查询特定基因对的预测记录，并包含它们的GO注释。
+// 这是重写后的、正确的版本。
+func (m *PredictionModel) GetByGenePair(geneASymbol, geneBSymbol string) ([]*models.FlatDBResult, error) {
+	var geneAId, geneBId int
 
-	row := m.DB.QueryRow(stmt, geneA, geneB, geneB, geneA)
-
-	p := &models.Prediction{}
-
-	err := row.Scan(&p.GeneA, &p.GeneB, &p.PredictionScore, &p.PredictingRelation, &p.BinaryPrediction, &p.Label)
+	// --- 步骤 1: 分别获取两个基因的ID ---
+	// 为了效率，我们可以一次性查询两个基因的ID
+	stmtId := `SELECT symbol, gene_id FROM genes WHERE symbol IN (?, ?)`
+	rowsId, err := m.DB.Query(stmtId, geneASymbol, geneBSymbol)
 	if err != nil {
-		if errors.Is(err, sql.ErrNoRows) {
-			return nil, ErrNoRecord
-		}
 		return nil, err
 	}
-	return p, nil
-}
+	defer rowsId.Close()
 
-// GetAllForGeneA 查询与单个基因相关的所有记录。
-func (m *PredictionModel) GetAllForGeneA(geneA string) ([]*models.Prediction, error) {
-	stmt := `SELECT GeneA, GeneB, Prediction, label AS PredictingRelation, BinaryPrediction, label
-             FROM gene_predictions WHERE GeneA = ? OR GeneB = ?`
+	idMap := make(map[string]int)
+	for rowsId.Next() {
+		var symbol string
+		var id int
+		if err := rowsId.Scan(&symbol, &id); err != nil {
+			return nil, err
+		}
+		idMap[symbol] = id
+	}
 
-	rows, err := m.DB.Query(stmt, geneA, geneA)
+	// 检查是否两个基因都找到了ID
+	var okA, okB bool
+	geneAId, okA = idMap[geneASymbol]
+	geneBId, okB = idMap[geneBSymbol]
+	if !okA || !okB {
+		return nil, ErrNoGene // 如果有任何一个基因不存在，则认为记录不存在
+	}
+
+	// --- 步骤 2: 标准化基因ID ---
+	if geneAId > geneBId {
+		geneAId, geneBId = geneBId, geneAId // 确保 geneAId < geneBId
+	}
+
+	// --- 步骤 3: 构建最终的、正确的JOIN查询 ---
+	// 这个查询现在直接使用标准化的ID来精确定位预测记录，
+	// 然后再分别用两个ID去LEFT JOIN各自的GO注释信息。
+	stmt := `
+        SELECT
+            gA.symbol AS gene_a_symbol,
+            gB.symbol AS gene_b_symbol,
+            p.prediction_score,
+            p.label,
+            p.gse_source,
+            p.gse_data,
+            goA.go_id AS gene_a_go_id,
+            goA.description AS gene_a_go_description,
+            goB.go_id AS gene_b_go_id,
+            goB.description AS gene_b_go_description
+        FROM
+            predictions p
+        -- 使用确定的gene_a_id和gene_b_id来JOIN genes表，目的是为了获取它们的symbol
+        JOIN
+            genes gA ON p.gene_a_id = gA.gene_id
+        JOIN
+            genes gB ON p.gene_b_id = gB.gene_id
+        -- 分别为gene A和gene B左连接它们的GO注释
+        LEFT JOIN
+            gene_go_mapping ggmA ON p.gene_a_id = ggmA.gene_id
+        LEFT JOIN
+            go_annotations goA ON ggmA.go_id = goA.go_id
+        LEFT JOIN
+            gene_go_mapping ggmB ON p.gene_b_id = ggmB.gene_id
+        LEFT JOIN
+            go_annotations goB ON ggmB.go_id = goB.go_id
+        WHERE
+            p.gene_a_id = ? AND p.gene_b_id = ?`
+
+	rows, err := m.DB.Query(stmt, geneAId, geneBId)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
 
-	predictions := []*models.Prediction{}
+	var results []*models.FlatDBResult
 	for rows.Next() {
-		p := &models.Prediction{}
-		err := rows.Scan(&p.GeneA, &p.GeneB, &p.PredictionScore, &p.PredictingRelation, &p.BinaryPrediction, &p.Label)
+		r := &models.FlatDBResult{}
+		err := rows.Scan(
+			&r.GeneASymbol,
+			&r.GeneBSymbol,
+			&r.PredictionScore,
+			&r.Label,
+			&r.GseSource,
+			&r.GseData,
+			&r.GeneAGoID,
+			&r.GeneAGoDescription,
+			&r.GeneBGoID,
+			&r.GeneBGoDescription,
+		)
 		if err != nil {
 			return nil, err
 		}
-		predictions = append(predictions, p)
+		results = append(results, r)
 	}
 
 	if err = rows.Err(); err != nil {
 		return nil, err
 	}
 
-	return predictions, nil
+	// 如果查询结果为空，返回特定的错误
+	// 理论上，如果prediction记录存在，结果至少会有一行（即使没有GO注释）
+	if len(results) == 0 {
+		return nil, ErrNoRecord
+	}
+
+	return results, nil
 }
