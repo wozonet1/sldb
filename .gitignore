@@ -2,3 +2,5 @@
 snippetbox
 www
 testdata
+*.log
+*.db

@@ -48,11 +48,11 @@
     >
       <h2 class="text-xl font-semibold dark:text-white">{{ $t('search.results') }} </h2>
       <div class="space-y-2 dark:text-gray-200">
-        <p><strong>{{ $t('search.table.gene1') }}:</strong> {{ searchResults.GeneA }}</p>
-        <p><strong>{{ $t('search.table.gene2') }}:</strong> {{ searchResults.GeneB }}</p>
-        <p><strong>{{ $t('search.table.predictionScore') }}:</strong> {{ searchResults.Prediction }}</p>
-        <p><strong>{{ $t('search.table.predictingRelation') }}:</strong> {{ searchResults['Predicting relation']?.slice(-3) === '_SL' ? 'SL' : 'nonSL' }}</p>
-        <p><strong>{{ $t('search.table.source') }}:</strong> {{ searchResults['Predicting relation']?.slice(3) === 'new' ? 'Struct2SL' : 'SynlethDB' }}</p>
+        <p><strong>{{ $t('search.table.gene1') }}:</strong> {{ searchResults.geneA.symbol }}</p>
+        <p><strong>{{ $t('search.table.gene2') }}:</strong> {{ searchResults.geneB.symbol }}</p>
+        <p><strong>{{ $t('search.table.predictionScore') }}:</strong> {{ searchResults.predictionScore }}</p>
+        <p><strong>{{ $t('search.table.predictingRelation') }}:</strong> {{ searchResults.label.endsWith('_SL')  ? 'SL' : 'nonSL' }}</p>
+        <p><strong>{{ $t('search.table.source') }}:</strong> {{ searchResults.label.startsWith('new')  ? 'Struct2SL' : 'SynlethDB' }}</p>
       </div>
     </div>
 
@@ -84,19 +84,19 @@
               class="hover:bg-gray-50 dark:hover:bg-neutral-600 transition-colors"
             >
               <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
-                {{ result['Gene A'] }}
+                {{ result.geneA.symbol }}
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
-                {{ result['Gene B'] }}
+                {{ result.geneB.symbol }}
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
-                {{ result['Prediction score'] }}
+                {{ result.predictionScore }}
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
-                {{ result['Predicting relation']?.slice(-3) === '_SL' ? 'SL' : 'nonSL' }}
+                {{ result.label.endsWith('_SL')  ? 'SL' : 'nonSL' }}
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
-                {{ result['Predicting relation']?.slice(3) === 'new' ? 'Struct2SL' : 'SynlethDB' }}
+                {{ result.label.startsWith('new') ? 'Struct2SL' : 'SynlethDB' }}
               </td>
             </tr>
           </tbody>
@@ -227,7 +227,7 @@ const searchGenes = async () => {
   })
 
   try {
-    const response = await axios.get('http://localhost:5555/api/v1/predict', {
+    const response = await axios.get('http://120.76.218.216/api/v1/predict', {
       params: {
         geneA: searchForm.gene1,
         geneB: searchForm.gene2

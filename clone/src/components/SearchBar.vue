@@ -50,6 +50,14 @@ const handleSearch = () => {
       }
     })
   }
+  else {
+    router.push({ name: 'Search',
+      query: {
+        geneA: 'TSPAN1',
+        geneB: ''
+      }
+     })
+  }
 }catch (error) {
     console.error('搜索时发生错误:', error)
     // 可以在这里添加错误处理逻辑，比如显示提示信息

@@ -25,7 +25,6 @@ type PredictionResponse struct {
 	GseData         *string   `json:"gseData"`
 }
 
-// FlatDBResult 是一个临时的内部结构体，用于方便地从数据库的扁平化查询结果中扫描数据。
 type FlatDBResult struct {
 	GeneASymbol     string
 	GeneBSymbol     string
@@ -34,6 +33,9 @@ type FlatDBResult struct {
 	GseSource       sql.NullString
 	GseData         sql.NullString
 
+	BinaryPrediction int // <-- 新增此字段，用于内部排序逻辑
+
+	// GO注释相关字段
 	GeneAGoID          sql.NullString
 	GeneAGoDescription sql.NullString
 	GeneBGoID          sql.NullString

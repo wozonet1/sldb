@@ -64,7 +64,8 @@
               class="text-blue dark:text-blue-400 underline">{{ $t('about.link') }}</a>.
           </p>
         </div>
-        <div class="rounded-lg overflow-hidden shadow-lg">
+        <div
+              class="rounded-lg overflow-hidden shadow-lg w-full max-w-2xl transition-transform duration-300 hover:scale-[1.02]">
           <!-- 图片占位符 -->
           <img src="../../src/assets/frame.jpg" alt="Struct2SL Model Framework" class="w-full h-auto">
         </div>
